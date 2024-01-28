@@ -1,42 +1,122 @@
-"use client"
+import { getTasks } from "@/lib/mongo/tasks";
+import { MixerHorizontalIcon, TrashIcon } from "@radix-ui/react-icons";
+import { Button } from "@/components/ui/button";
 import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from "@/components/ui/table"
-  import { PersonIcon } from '@radix-ui/react-icons'
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
+// datum zur anzeige umformatieren (asana speichert es  als yyyy-dd-mm)
+function convertDateString(inputString) {
+  const dateObject = new Date(inputString);
+  const day = dateObject.getDate();
+  const month = dateObject.getMonth() + 1;
+  const year = dateObject.getFullYear();
+  const formattedDateString = `${day < 10 ? "0" : ""}${day}.${
+    month < 10 ? "0" : ""
+  }${month}.${year}`;
+  return formattedDateString;
+}
 
-export default function table() {
-    return (
-<Table className="border  p-24">
-  <TableCaption>A list of your recent invoices.</TableCaption>
-  <TableHeader >
-    <TableRow>
-      <TableHead>Kunde & Projekt</TableHead>
-      <TableHead>Nummer</TableHead>
-      <TableHead>Titel</TableHead>
-      <TableHead>Termin</TableHead>
-      <TableHead>Status</TableHead>
-      <TableHead className="text-right"><p> <PersonIcon className="inline-block mb-1" /> Verantwortlich </p></TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
+async function fetchTasks() {
+  const { tasks } = await getTasks();
+  if (!tasks) throw new Error("Failed to fetch tasks!");
+  return tasks;
+}
 
-    <TableRow>
-      <TableCell className="font-medium">Frage</TableCell>
-      <TableCell>Paid</TableCell>
-      <TableCell>Credit Card</TableCell>
-      <TableCell>Credit Card</TableCell>
-      <TableCell>Credit Card</TableCell>
-      <TableCell className="text-right">$250.00</TableCell>
-    </TableRow>
+export default async function table() {
+  const tasks = await fetchTasks();
+  return (
+    <Table className="border  shadow-lg dark:shadow-none dark:bg-transparent rounded-md p-24">
+      <TableCaption>
+        {" "}
+        beispiel tickets aus mit den relaventen infos poool.
+      </TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead>titel</TableHead>
+          <TableHead>kunde & projekt</TableHead>
+          <TableHead>ticketnummer</TableHead>
+          <TableHead>termin</TableHead>
+          <TableHead className="">
+            <p> verantwortlich </p>
+          </TableHead>
+          <TableHead>status</TableHead>
+          <TableHead className="text-right w-fit"></TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {tasks.map((task) => {
+          let displayedAssignee;
+          let bgStatus;
 
+          /// verantowrtlichen im klarnamen den email adressen zuordnen
+          switch (task.assignee) {
+            case "moin@fabsbehrens.de":
+              displayedAssignee = "fabian behrens";
+              break;
+            case "sg@teamiken.de":
+              displayedAssignee = "sascha görke";
+              break;
+            case "vw@teamiken.de":
+              displayedAssignee = "vincent görke";
+              break;
+            case "rb@teamiken.de":
+              displayedAssignee = "rüdiger bode";
+              break;
+            default:
+              displayedAssignee = task.assignee;
+              break;
+          }
 
-  </TableBody>
-  </Table>
-  )};
+          /// hintergrudnfarben zu ordnen zu versch. status der tickets
+          switch (task.status) {
+            case "Freigabe Projektleiter":
+              bgStatus = "bg-green-100 dark:bg-transparent ";
+              break;
+            case "Offen":
+              bgStatus = "bg-yellow-100 dark:bg-transparent ";
+              break;
+            case "In Arbeit":
+              bgStatus = "bg-cyan-100 dark:bg-transparent ";
+              break;
+            case "On Hold":
+              bgStatus = "bg-red-100  dark:bg-transparent";
+              break;
+            default:
+              bgStatus = "bg-transparent";
+              break;
+          }
+
+          //  datum umformatieren
+          const datumFormatiert = convertDateString(task.termin);
+
+          return (
+            <TableRow className="hover:shadow-md" key={task._id}>
+              <TableCell className="font-semibold">{task.name}</TableCell>
+              <TableCell>{task.project}</TableCell>
+              <TableCell>{task.nummer}</TableCell>
+              <TableCell>{datumFormatiert}</TableCell>
+              <TableCell>{displayedAssignee}</TableCell>
+              <TableCell className={` ${bgStatus}`}>{task.status}</TableCell>
+              <TableCell className="text-right w-fit">
+                {" "}
+                <Button className="mr-4 ml-1" variant="outline" size="icon">
+                  <MixerHorizontalIcon className="h-4 w-4" />
+                </Button>{" "}
+                <Button variant="destructive" size="icon">
+                  <TrashIcon className="h-4 w-4" />
+                </Button>{" "}
+              </TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
+  );
+}

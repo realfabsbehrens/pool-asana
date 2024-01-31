@@ -3,7 +3,6 @@ import { MixerHorizontalIcon, TrashIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import DeleteButton from "@/components/deleteButton";
-import KonfigButton from "@/components/konfigButton";
 import {
   Dialog,
   DialogClose,
@@ -27,7 +26,7 @@ import {
 } from "@/components/ui/table";
 
 // datum zur anzeige umformatieren (asana speichert es  als yyyy-dd-mm)
-function convertDateString(inputString) {
+function convertDateString(inputString: string): string {
   const dateObject = new Date(inputString);
   const day = dateObject.getDate();
   const month = dateObject.getMonth() + 1;

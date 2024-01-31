@@ -1,13 +1,19 @@
 import { getTasks } from "@/lib/mongo/tasks";
 
-async function fetchTasks() {
+interface Task {
+  _id: string;
+  name: string;
+  // Add other properties as needed
+}
+
+async function fetchTasks(): Promise<Task[]> {
   const { tasks } = await getTasks();
   if (!tasks) throw new Error("Failed to fetch tasks!");
   return tasks;
 }
 
 export default async function data() {
-  const tasks = await fetchTasks();
+  const tasks: Task[] = await fetchTasks();
 
   return (
     <ul>

@@ -1,6 +1,21 @@
 import { getTasks } from "@/lib/mongo/tasks";
 import { MixerHorizontalIcon, TrashIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import DeleteButton from "@/components/deleteButton";
+import KonfigButton from "@/components/konfigButton";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Table,
   TableBody,
@@ -35,11 +50,11 @@ export default async function table() {
     <Table className="border  shadow-lg dark:shadow-none dark:bg-transparent rounded-md p-24">
       <TableCaption>
         {" "}
-        beispiel tickets aus mit den relaventen infos poool.
+        beispiel tickets aus poool mit den relaventen infos.
       </TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead>titel</TableHead>
+          <TableHead className=" border-r">titel</TableHead>
           <TableHead>kunde & projekt</TableHead>
           <TableHead>ticketnummer</TableHead>
           <TableHead>termin</TableHead>
@@ -98,20 +113,70 @@ export default async function table() {
 
           return (
             <TableRow className="hover:shadow-md" key={task._id}>
-              <TableCell className="font-semibold">{task.name}</TableCell>
+              <TableCell className="font-semibold  border-r">
+                {task.name}
+              </TableCell>
               <TableCell>{task.project}</TableCell>
               <TableCell>{task.nummer}</TableCell>
               <TableCell>{datumFormatiert}</TableCell>
               <TableCell>{displayedAssignee}</TableCell>
               <TableCell className={` ${bgStatus}`}>{task.status}</TableCell>
-              <TableCell className="text-right w-fit">
-                {" "}
-                <Button className="mr-4 ml-1" variant="outline" size="icon">
-                  <MixerHorizontalIcon className="h-4 w-4" />
-                </Button>{" "}
-                <Button variant="destructive" size="icon">
-                  <TrashIcon className="h-4 w-4" />
-                </Button>{" "}
+              <TableCell className="text-right flex flex-row">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button className="mr-4 ml-1" variant="outline" size="icon">
+                      <MixerHorizontalIcon className="h-4 w-4" />
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-4xl">
+                    <DialogHeader>
+                      <DialogTitle>Ticket bearbeiten</DialogTitle>
+                      <DialogDescription>
+                        hier können alle einstellungen des tickets geändert
+                        werden.
+                      </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="flex items-center space-x-2">
+                      <div className="grid flex-1 gap-2">
+                        <Label htmlFor="ticketname" className="">
+                          Ticketname
+                        </Label>
+                        <Input id="ticketname" defaultValue={task.name} />
+                      </div>
+                      <div className="grid flex-3 gap-2">
+                        <Label htmlFor="ticketnummer" className="">
+                          Ticketnummer
+                        </Label>
+                        <Input
+                          id="ticketnummer"
+                          readOnly
+                          defaultValue={task.nummer}
+                        />
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="grid flex-1 gap-2">
+                        <Label htmlFor="tickettext" className="">
+                          tickettext
+                        </Label>
+                        <Textarea
+                          placeholder="Hier ist Platz für deinen tickettext."
+                          id="message"
+                        />
+                      </div>
+                    </div>
+
+                    <DialogFooter className="sm:justify-start">
+                      <DialogClose asChild>
+                        <Button type="button" variant="secondary">
+                          schliessen
+                        </Button>
+                      </DialogClose>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+                <DeleteButton></DeleteButton>
               </TableCell>
             </TableRow>
           );

@@ -4,7 +4,7 @@ import { MongoClient } from "mongodb";
 
 // read the uri from env-local
 const URI = process.env.MONGODB_URI;
-const options = {};
+const options = { useUnifiedTopology: true };
 // error if now uri given
 if (!URI) throw new Error("Please add your URL to .env.local");
 

@@ -22,7 +22,7 @@ export default async function handler(req, res) {
         .update(JSON.stringify(req.body))
         .digest("hex");
       console.log(`Webhook Data on ${Date()}:`);
-      console.log(req.body);
+      console.log(JSON.stringify(req.body, null, 2)); // Stringify with indentation for better readability
       if (
         !crypto.timingSafeEqual(
           Buffer.from(req.headers["x-hook-signature"]),

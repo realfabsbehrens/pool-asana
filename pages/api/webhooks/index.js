@@ -21,7 +21,8 @@ export default async function handler(req, res) {
       const computedSignature = createHmac("SHA256", secret || "")
         .update(JSON.stringify(req.body))
         .digest("hex");
-      console.log("aufgabe geändert");
+      console.log(`Webhook Data on ${Date()}:`);
+      console.log(req.body);
       if (
         !crypto.timingSafeEqual(
           Buffer.from(req.headers["x-hook-signature"]),

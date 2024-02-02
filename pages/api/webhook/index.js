@@ -1,33 +1,22 @@
-// index.js
-const express = require("express");
-const crypto = require("crypto");
-const dotenv = require("dotenv");
-const axios = require("axios");
-dotenv.config();
+// pages/api/webhook.js
+import { createHmac } from "crypto";
+import axios from "axios";
 
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
 
-// Initializes Express app.
-const app = express();
-
-// Parses JSON bodies.
-app.use(express.json());
-
 // Global variable to store the x-hook-secret
 let secret = "";
 
-// Local endpoint for receiving events
-app.post("/receiveWebhook", (req, res) => {
+export default async function handler(req, res) {
   if (req.headers["x-hook-secret"]) {
     console.log("This is a new webhook");
     secret = req.headers["x-hook-secret"];
 
     res.setHeader("X-Hook-Secret", secret);
-    res.sendStatus(200);
+    res.status(200).end();
   } else if (req.headers["x-hook-signature"]) {
-    const computedSignature = crypto
-      .createHmac("SHA256", secret)
+    const computedSignature = createHmac("SHA256", secret)
       .update(JSON.stringify(req.body))
       .digest("hex");
 
@@ -38,10 +27,10 @@ app.post("/receiveWebhook", (req, res) => {
       )
     ) {
       // Fail
-      res.sendStatus(401);
+      res.status(401).end();
     } else {
       // Success
-      res.sendStatus(200);
+      res.status(200).end();
       console.log(`Events on ${Date()}:`);
       console.log(req.body.events);
       req.body.events.forEach((event) => {
@@ -50,8 +39,9 @@ app.post("/receiveWebhook", (req, res) => {
     }
   } else {
     console.error("Something went wrong!");
+    res.status(500).end();
   }
-});
+}
 
 async function fetchTask(taskId) {
   const url = `https://app.asana.com/api/1.0/tasks/${taskId}`;
@@ -66,7 +56,3 @@ async function fetchTask(taskId) {
     console.log(err);
   }
 }
-
-app.listen(8080, () => {
-  console.log(`Server started on port 8080`);
-});

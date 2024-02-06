@@ -33,7 +33,7 @@ export default async function handler(req, res) {
         // Success
         res.status(200).end();
         let asanaGID = req.body.events[0].resource.gid;
-        deleteTask((id = asanaGID));
+        deleteTask(asanaGID);
       }
     } else {
       console.error("Invalid request");
@@ -45,6 +45,6 @@ export default async function handler(req, res) {
   }
 }
 
-function deleteTask() {
+function deleteTask(id) {
   console.log(id);
 }

@@ -34,7 +34,8 @@ export default async function handler(req, res) {
         // Success
         res.status(200).end();
         let asanaGID = req.body.events[0].resource.gid;
-        deleteTask(asanaGID);
+        const deletedTask = await deleteTasksByAsanaGid(asanaGID);
+        console.log(deletedTask);
       }
     } else {
       console.error("Invalid request");

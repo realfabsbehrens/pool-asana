@@ -33,7 +33,7 @@ export default async function handler(req, res) {
       } else {
         // Success
         res.status(200).end();
-        console.log(req.body.events.event);
+        console.log(req.body.events);
       }
     } else {
       console.error("Invalid request");

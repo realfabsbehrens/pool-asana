@@ -2,6 +2,7 @@
 import crypto from "crypto";
 import { createHmac } from "crypto";
 import axios from "axios";
+import deleteTask from "../../../../lib/asana";
 
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
@@ -43,8 +44,4 @@ export default async function handler(req, res) {
     console.error("Error in handler:", error.message);
     res.status(500).end();
   }
-}
-
-function deleteTask(id) {
-  console.log(id);
 }

@@ -36,7 +36,9 @@ export default async function handler(req, res) {
         res.status(200).end();
         console.log(`Events on ${Date()}:`);
         console.log(req.body.events);
-        // Remove the fetchTask call
+        req.body.events.forEach((event) => {
+          fetchTask(event.resource.gid);
+        });
       }
     } else {
       console.error("Invalid request");
@@ -45,5 +47,20 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error("Error in handler:", error.message);
     res.status(500).end();
+  }
+}
+
+async function fetchTask(taskId) {
+  try {
+    const url = `https://app.asana.com/api/1.0/tasks/${taskId}`;
+    const headers = {
+      Accept: "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    };
+
+    const response = await axios.get(url, { headers });
+    console.log(response.data.data);
+  } catch (err) {
+    console.error("Error in fetchTask:", err.message);
   }
 }

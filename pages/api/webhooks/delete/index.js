@@ -33,7 +33,7 @@ export default async function handler(req, res) {
         // Success
         res.status(200).end();
         let asanaGID = req.body.events[0].resource.gid;
-        deletetask(asanaGID);
+        deleteTask(asanaGID);
       }
     } else {
       console.error("Invalid request");

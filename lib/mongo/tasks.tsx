@@ -49,3 +49,5 @@ export async function deleteTasksByAsanaGid(asanaGid) {
     return { error: "Failed to delete tasks!" };
   }
 }
+const result = await deleteTasksByAsanaGid("1206538752007054");
+console.log(result); // { success: true } wenn die Aufgabe gelöscht wurde

@@ -9,12 +9,10 @@ export default async function handler(req, res) {
       // Fügen Sie hier Ihre Verarbeitungslogik ein
 
       // Senden Sie eine Antwort
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "Daten erfolgreich empfangen und verarbeitet.",
-        });
+      res.status(200).json({
+        success: true,
+        message: "Daten erfolgreich empfangen und verarbeitet.",
+      });
     } catch (error) {
       console.error("Fehler bei der Verarbeitung der Daten:", error);
       res

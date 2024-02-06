@@ -32,7 +32,8 @@ export default async function handler(req, res) {
       } else {
         // Success
         res.status(200).end();
-        console.log(req.body.events[0].resource.gid);
+        let asanaGID = req.body.events[0].resource.gid;
+        deletetask(asanaGID);
       }
     } else {
       console.error("Invalid request");
@@ -42,4 +43,9 @@ export default async function handler(req, res) {
     console.error("Error in handler:", error.message);
     res.status(500).end();
   }
+}
+
+function deleteTask() {
+  console.log("function this");
+  console.log(this);
 }

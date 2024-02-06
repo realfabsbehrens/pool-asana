@@ -1,28 +1,66 @@
-const Asana = require("asana");
+// pages/api/webhook.js
+import crypto from "crypto";
+import { createHmac } from "crypto";
+import axios from "axios";
 
-let client = Asana.ApiClient.instance;
-let token = client.authentications["token"];
-token.accessToken = process.env.ASANAKEY;
+// Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
+const accessToken = process.env.ASANAKEY;
 
-let webhooksApiInstance = new Asana.WebhooksApi();
-let body = {
-  data: {
-    resource: "1206375681112048",
-    target: "https://pool-asana.vercel.app/api/webhooks",
-  },
-}; // Object | The webhook workspace and target.
-let opts = {
-  opt_fields:
-    "active,created_at,filters,filters.action,filters.fields,filters.resource_subtype,last_failure_at,last_failure_content,last_success_at,resource,resource.name,target",
-};
-webhooksApiInstance.createWebhook(body, opts).then(
-  (result) => {
-    console.log(
-      "API called successfully. Returned data: " +
-        JSON.stringify(result.data, null, 2)
-    );
-  },
-  (error) => {
-    console.error(error.response.body);
+// Global variable to store the x-hook-secret
+let secret = "";
+
+export default async function handler(req, res) {
+  try {
+    if (req.headers["x-hook-secret"]) {
+      console.log("This is a new webhook");
+      secret = req.headers["x-hook-secret"];
+
+      res.setHeader("X-Hook-Secret", secret);
+      res.status(200).end();
+    } else if (req.headers["x-hook-signature"]) {
+      const computedSignature = createHmac("SHA256", secret || "")
+        .update(JSON.stringify(req.body))
+        .digest("hex");
+      console.log(`Webhook Data on ${Date()}:`);
+      console.log(req.body);
+      if (
+        !crypto.timingSafeEqual(
+          Buffer.from(req.headers["x-hook-signature"]),
+          Buffer.from(computedSignature)
+        )
+      ) {
+        // Fail
+        res.status(401).end();
+      } else {
+        // Success
+        res.status(200).end();
+        console.log(`Events on ${Date()}:`);
+        console.log(req.body.events);
+        req.body.events.forEach((event) => {
+          fetchTask(event.resource.gid);
+        });
+      }
+    } else {
+      console.error("Invalid request");
+      res.status(400).end();
+    }
+  } catch (error) {
+    console.error("Error in handler:", error.message);
+    res.status(500).end();
   }
-);
+}
+
+async function fetchTask(taskId) {
+  try {
+    const url = `https://app.asana.com/api/1.0/tasks/${taskId}`;
+    const headers = {
+      Accept: "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    };
+
+    const response = await axios.get(url, { headers });
+    console.log(response.data.data);
+  } catch (err) {
+    console.error("Error in fetchTask:", err.message);
+  }
+}

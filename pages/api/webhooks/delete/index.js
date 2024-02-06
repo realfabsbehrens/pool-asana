@@ -2,7 +2,6 @@
 import crypto from "crypto";
 import { createHmac } from "crypto";
 import axios from "axios";
-import { deleteTasksByAsanaGid } from "../../../../lib/asana";
 
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;

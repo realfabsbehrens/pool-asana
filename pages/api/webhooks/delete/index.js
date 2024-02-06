@@ -2,6 +2,7 @@
 import crypto from "crypto";
 import { createHmac } from "crypto";
 import axios from "axios";
+import { deleteTasksByAsanaGid } from "../../../../lib/asana";
 
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
@@ -32,10 +33,8 @@ export default async function handler(req, res) {
       } else {
         // Success
         res.status(200).end();
-        req.body.events.forEach((events) => {
-          let asanaGID = resource.gid;
-          console.log(asanaGID);
-        });
+        let asanaGID = req.body.events[0].resource.gid;
+        console.log(asanaGID);
       }
     } else {
       console.error("Invalid request");

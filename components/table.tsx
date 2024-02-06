@@ -1,4 +1,5 @@
 import { getTasks } from "@/lib/mongo/tasks";
+import { deleteTasksByAsanaGid } from "@/lib/mongo/tasks";
 import { MixerHorizontalIcon, TrashIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -45,6 +46,9 @@ async function fetchTasks() {
 
 export default async function table() {
   const tasks = await fetchTasks();
+  const result = await deleteTasksByAsanaGid("1234566778");
+  console.log(result); // { success: true } wenn die Aufgabe gelöscht wurde
+
   return (
     <Table className="border  shadow-lg dark:shadow-none dark:bg-transparent rounded-md p-24">
       <TableCaption>

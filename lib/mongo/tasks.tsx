@@ -38,3 +38,14 @@ export async function getTasks() {
     return { error: "Failed to fetch movies!" };
   }
 }
+
+// Neue Funktion zum Löschen von Aufgaben mit einer bestimmten asana_gid
+export async function deleteTasksByAsanaGid(asanaGid) {
+  try {
+    if (!tasks) await init();
+    const result = await tasks.deleteOne({ asana_gid: asanaGid });
+    return { success: result.deletedCount > 0 };
+  } catch (error) {
+    return { error: "Failed to delete tasks!" };
+  }
+}

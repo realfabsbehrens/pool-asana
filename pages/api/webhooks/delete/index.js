@@ -34,7 +34,9 @@ export default async function handler(req, res) {
         // Success
         res.status(200).end();
         req.body.events.forEach((event) => {
-          console.log(event);
+          let taskGID = event.resource.taskGID;
+          console.log("Aufgabe gelöscht!!");
+          console.log(taskGID);
         });
       }
     } else {

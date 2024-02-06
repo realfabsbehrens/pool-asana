@@ -34,9 +34,8 @@ export default async function handler(req, res) {
         // Success
         res.status(200).end();
         req.body.events.forEach((event) => {
-          let asanaGID = req.body.events[0].resource.gid;
-          const deletedTask = deleteTasksByAsanaGid(asanaGID);
-          console.log(deletedTask);
+          let asanaGID = resource.gid;
+          console.log(asanaGID);
         });
       }
     } else {

@@ -46,7 +46,7 @@ async function fetchTasks() {
 
 export default async function table() {
   const tasks = await fetchTasks();
-  const result = await deleteTasksByAsanaGid("1234566778");
+  const result = await deleteTasksByAsanaGid("1206538752007054");
   console.log(result); // { success: true } wenn die Aufgabe gelöscht wurde
 
   return (

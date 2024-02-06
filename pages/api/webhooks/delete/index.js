@@ -33,7 +33,7 @@ export default async function handler(req, res) {
       } else {
         // Success
         res.status(200).end();
-        console.log(req.body.events);
+        console.log(req.body.events.resource.gid);
       }
     } else {
       console.error("Invalid request");

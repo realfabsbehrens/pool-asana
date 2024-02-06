@@ -21,8 +21,7 @@ export default async function handler(req, res) {
       const computedSignature = createHmac("SHA256", secret || "")
         .update(JSON.stringify(req.body))
         .digest("hex");
-      console.log(`Webhook Data on ${Date()}:`);
-      console.log(req.body);
+
       if (
         !crypto.timingSafeEqual(
           Buffer.from(req.headers["x-hook-signature"]),
@@ -34,10 +33,8 @@ export default async function handler(req, res) {
       } else {
         // Success
         res.status(200).end();
-        console.log(`Events on ${Date()}:`);
-        console.log(req.body.events);
         req.body.events.forEach((event) => {
-          fetchTask(event.resource.gid);
+          console.log(event);
         });
       }
     } else {
@@ -47,20 +44,5 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error("Error in handler:", error.message);
     res.status(500).end();
-  }
-}
-
-async function fetchTask(taskId) {
-  try {
-    const url = `https://app.asana.com/api/1.0/tasks/${taskId}`;
-    const headers = {
-      Accept: "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    };
-
-    const response = await axios.get(url, { headers });
-    console.log(response.data.data);
-  } catch (err) {
-    console.error("Error in fetchTask:", err.message);
   }
 }

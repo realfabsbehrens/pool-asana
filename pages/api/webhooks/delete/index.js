@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     if (req.headers["x-hook-secret"]) {
       console.log("This is a new webhook");
       secret = req.headers["x-hook-secret"];
-
+      console.log(req.body);
       res.setHeader("X-Hook-Secret", secret);
       res.status(200).end();
     } else if (req.headers["x-hook-signature"]) {

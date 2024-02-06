@@ -35,7 +35,7 @@ export default async function handler(req, res) {
         res.status(200).end();
         req.body.events.forEach((event) => {
           let data = { event };
-          console.log(data.resource.gid);
+          console.log(data.resource);
         });
       }
     } else {

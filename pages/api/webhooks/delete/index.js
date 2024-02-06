@@ -32,7 +32,7 @@ export default async function handler(req, res) {
       } else {
         // Success
         res.status(200).end();
-        req.body.events.forEach((event) => {
+        req.body.events.forEach((events) => {
           let asanaGID = resource.gid;
           console.log(asanaGID);
         });

@@ -11,6 +11,7 @@ const accessToken = process.env.ASANAKEY;
 let secret = "";
 
 export default async function handler(req, res) {
+  deleteTasksByAsanaGid("1206558265410342");
   try {
     if (req.headers["x-hook-secret"]) {
       console.log("This is a new webhook");

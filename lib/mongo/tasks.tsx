@@ -43,7 +43,7 @@ export async function getTasks() {
 export async function deleteTasksByAsanaGid(asanaGid) {
   try {
     if (!tasks) await init();
-    const result = await tasks.deleteOne({ asana_gid: asanaGid });
+    const result = await tasks.deleteOne({ asanaGID: asanaGid });
     return { success: result.deletedCount > 0 };
   } catch (error) {
     return { error: "Failed to delete tasks!" };

@@ -1,5 +1,3 @@
-"use client";
-
 import { getTasks } from "@/lib/mongo/tasks";
 
 import { MixerHorizontalIcon, TrashIcon } from "@radix-ui/react-icons";

@@ -9,7 +9,7 @@ const accessToken = process.env.ASANAKEY;
 
 // Global variable to store the x-hook-secret
 let secret = "";
-let asanaGID = "";
+let asanaGID;
 
 export default async function handler(req, res) {
   try {
@@ -51,6 +51,11 @@ export default async function handler(req, res) {
   }
 }
 
-function aufgabeloeschen(asanaGID) {
-  deleteTasksByAsanaGid(asanaGID);
+async function aufgabeloeschen(asanaGID) {
+  try {
+    const result = await deleteTasksByAsanaGid(asanaGID);
+    console.log(result);
+  } catch (error) {
+    console.error(error.message);
+  }
 }

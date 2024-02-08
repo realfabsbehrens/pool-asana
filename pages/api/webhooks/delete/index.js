@@ -11,7 +11,6 @@ const accessToken = process.env.ASANAKEY;
 let secret = "";
 
 export default async function handler(req, res) {
-  deleteTasksByAsanaGid("1206558265410342");
   try {
     if (req.headers["x-hook-secret"]) {
       console.log("This is a new webhook");
@@ -34,6 +33,7 @@ export default async function handler(req, res) {
       } else {
         // Success
         res.status(200).end();
+        deleteTasksByAsanaGid("1206558265410342");
         let asanaGID = req.body.events[0].resource.gid;
         console.log("Aufgaben ID angekommen:");
         console.log(asanaGID);

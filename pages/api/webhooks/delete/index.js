@@ -51,7 +51,7 @@ export default async function handler(req, res) {
   }
 }
 
-async function aufgabeloeschen(asanaGID) {
+export async function aufgabeloeschen(asanaGID) {
   try {
     const result = await deleteTasksByAsanaGid(asanaGID);
     console.log(result);

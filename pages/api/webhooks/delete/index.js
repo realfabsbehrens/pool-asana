@@ -36,7 +36,7 @@ export default async function handler(req, res) {
         // Success
         res.status(200).end();
         if (req.body.events[0]) {
-          asanaGID = "1206563694589846";
+          const asanaGID = "1206563694589846";
           await aufgabeloeschen(asanaGID);
         }
       }

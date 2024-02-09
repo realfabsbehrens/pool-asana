@@ -34,9 +34,12 @@ export default async function handler(req, res) {
         res.status(200).end();
         if (req.body.events[0]) {
           let asanaGID = "1206564621183618";
-          console.log("Response angekommen");
+          console.log(
+            "Response angekommen, Asana GID to be deleted:",
+            asanaGID
+          );
           //  let asanaGID = req.body.events[0].resource.gid;
-          let deleteTask = await aufgabeloeschen(asanaGID);
+          let deleteTask = await deleteTasksByAsanaGid(asanaGID);
         }
       }
     } else {
@@ -46,15 +49,5 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error("Error in handler:", error.message);
     res.status(500).end();
-  }
-}
-
-export async function aufgabeloeschen(asanaGID) {
-  try {
-    const result = await deleteTasksByAsanaGid(asanaGID);
-    console.log("Versuche Übergabe an task.tsx");
-    console.log(result);
-  } catch (error) {
-    console.error(error.message);
   }
 }

@@ -36,7 +36,7 @@ export default async function handler(req, res) {
           let asanaGID = "1206564621183618";
           console.log("Response angekommen");
           //  let asanaGID = req.body.events[0].resource.gid;
-          await aufgabeloeschen(asanaGID);
+          let deleteTask = await aufgabeloeschen(asanaGID);
         }
       }
     } else {

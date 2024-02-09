@@ -44,7 +44,6 @@ export default async function table() {
     if (!tasks) throw new Error("Failed to fetch tasks!");
     return tasks;
   }
-
   const tasks = await fetchTasks();
 
   return (

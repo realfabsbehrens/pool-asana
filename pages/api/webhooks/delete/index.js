@@ -17,11 +17,8 @@ export default async function handler(req, res) {
       res.setHeader("X-Hook-Secret", secret);
       res.status(200).end();
     } else if (req.headers["x-hook-signature"]) {
-      // Ensure proper JSON parsing
-      const requestBody = JSON.stringify(req.body);
-
       const computedSignature = createHmac("SHA256", secret || "")
-        .update(requestBody)
+        .update(JSON.stringify(req.body))
         .digest("hex");
 
       if (
@@ -36,7 +33,9 @@ export default async function handler(req, res) {
         // Success
         res.status(200).end();
         if (req.body.events[0]) {
-          const asanaGID = "1206563694589846";
+          let asanaGID = "1206564621183618";
+          console.log("Response angekommen");
+          //  let asanaGID = req.body.events[0].resource.gid;
           await aufgabeloeschen(asanaGID);
         }
       }
@@ -53,6 +52,7 @@ export default async function handler(req, res) {
 export async function aufgabeloeschen(asanaGID) {
   try {
     const result = await deleteTasksByAsanaGid(asanaGID);
+    console.log("Versuche Übergabe an task.tsx");
     console.log(result);
   } catch (error) {
     console.error(error.message);

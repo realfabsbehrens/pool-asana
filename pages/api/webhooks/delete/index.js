@@ -36,7 +36,7 @@ export default async function handler(req, res) {
           let asanaGID = "1206564621183618";
           console.log("Response angekommen");
           //  let asanaGID = req.body.events[0].resource.gid;
-          let deleteTask = await aufgabeloeschen(asanaGID);
+          let deleteTask = aufgabeloeschen(asanaGID);
         }
       }
     } else {
@@ -49,7 +49,7 @@ export default async function handler(req, res) {
   }
 }
 
-export async function aufgabeloeschen(asanaGID) {
+async function aufgabeloeschen(asanaGID) {
   try {
     const result = await deleteTasksByAsanaGid(asanaGID);
     console.log("Versuche Übergabe an task.tsx");

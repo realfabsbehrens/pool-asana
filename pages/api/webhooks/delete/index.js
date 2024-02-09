@@ -39,7 +39,15 @@ export default async function handler(req, res) {
             asanaGID
           );
           //  let asanaGID = req.body.events[0].resource.gid;
-          let deleteTask = await deleteTasksByAsanaGid(asanaGID);
+          try {
+            let deleteTask = await deleteTasksByAsanaGid(asanaGID);
+            console.log("Ergebnis von deleteTasksByAsanaGid:", deleteTask);
+          } catch (error) {
+            console.error(
+              "Fehler beim Aufruf von deleteTasksByAsanaGid:",
+              error
+            );
+          }
         }
       }
     } else {

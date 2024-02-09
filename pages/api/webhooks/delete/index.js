@@ -36,8 +36,7 @@ export default async function handler(req, res) {
         // Success
         res.status(200).end();
         if (req.body.events[0]) {
-          asanaGID = req.body.events[0].resource.gid;
-          // Use the global variable consistently
+          asanaGID = "1206563694589846";
           await aufgabeloeschen(asanaGID);
         }
       }

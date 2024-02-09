@@ -1,5 +1,5 @@
 import { getTasks } from "@/lib/mongo/tasks";
-
+import { deleteTasksByAsanaGid } from "@/lib/mongo/tasks";
 import { MixerHorizontalIcon, TrashIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,13 +38,13 @@ function convertDateString(inputString: string): string {
   return formattedDateString;
 }
 
-async function fetchTasks() {
-  const { tasks } = await getTasks();
-  if (!tasks) throw new Error("Failed to fetch tasks!");
-  return tasks;
-}
-
 export default async function table() {
+  async function fetchTasks() {
+    const { tasks } = await getTasks();
+    if (!tasks) throw new Error("Failed to fetch tasks!");
+    return tasks;
+  }
+
   const tasks = await fetchTasks();
 
   return (

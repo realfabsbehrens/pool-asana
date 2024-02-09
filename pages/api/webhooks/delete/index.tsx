@@ -33,20 +33,8 @@ export default async function handler(req, res) {
         // Success
         res.status(200).end();
         if (req.body.events[0]) {
-          try {
-            await init();
-            const asanaGidToDelete = "1206564621183618"; // Ersetzen Sie dies durch die tatsächliche Asana-GID
-            const deletionResult = await deleteTasksByAsanaGid(
-              asanaGidToDelete
-            );
-            console.log(deletionResult);
-          } catch (error) {
-            console.error(
-              "Fehler beim Aufruf von deleteTasksByAsanaGid:",
-              error
-            );
-          }
-        }
+         let asanaGidToDelete = "1206564621183618"; 
+         await deleteTasksByAsanaGid(asanaGidToDelete);
       }
     } else {
       console.error("Invalid request");
@@ -57,3 +45,4 @@ export default async function handler(req, res) {
     res.status(500).end();
   }
 }
+

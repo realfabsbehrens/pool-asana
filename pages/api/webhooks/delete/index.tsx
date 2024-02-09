@@ -1,7 +1,7 @@
 // pages/api/webhook.js
 import crypto from "crypto";
 import { createHmac } from "crypto";
-import { init, deleteTest, deleteTasksByAsanaGid } from "@/lib/mongo/tasks";
+import { init, deleteTasksByAsanaGid } from "@/lib/mongo/tasks";
 
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
@@ -33,24 +33,13 @@ export default async function handler(req, res) {
         // Success
         res.status(200).end();
         if (req.body.events[0]) {
-          let asanaGID = "1206564621183618";
-          console.log(
-            "Response angekommen, Asana GID to be deleted:",
-            asanaGID
-          );
-
           try {
-            // Initialisiere die Datenbankverbindung
-            console.log("Vor dem Aufruf von init");
             await init();
-            console.log("Nach dem Aufruf von init");
-
-            // Lösche die Aufgaben
-            console.log("Vor dem Aufruf von deleteTasksByAsanaGid");
-            deleteTest();
-            let deleteTask = deleteTasksByAsanaGid(asanaGID);
-            console.log("Nach dem Aufruf von deleteTasksByAsanaGid");
-            console.log("Ergebnis von deleteTasksByAsanaGid:", deleteTask);
+            const asanaGidToDelete = "1206564621183618"; // Ersetzen Sie dies durch die tatsächliche Asana-GID
+            const deletionResult = await deleteTasksByAsanaGid(
+              asanaGidToDelete
+            );
+            console.log(deletionResult);
           } catch (error) {
             console.error(
               "Fehler beim Aufruf von deleteTasksByAsanaGid:",

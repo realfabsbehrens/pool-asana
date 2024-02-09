@@ -62,3 +62,8 @@ export async function deleteTasksByAsanaGid(asanaGid) {
     return { error: "Failed to delete tasks!" };
   }
 }
+
+export function deleteTest() {
+  const run = deleteTasksByAsanaGid("1206564621183618");
+  console.log("Nach dem Aufruf Delete Test");
+}

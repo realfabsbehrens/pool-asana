@@ -1,8 +1,8 @@
 // pages/api/webhook.js
-
+import clientPromise from ".";
 import crypto from "crypto";
 import { createHmac } from "crypto";
-import { init, deleteTasksByAsanaGid } from "@/lib/mongo/tasks";
+import { init, deleteTest, deleteTasksByAsanaGid } from "@/lib/mongo/tasks";
 
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
@@ -48,6 +48,7 @@ export default async function handler(req, res) {
 
             // Lösche die Aufgaben
             console.log("Vor dem Aufruf von deleteTasksByAsanaGid");
+            deleteTest();
             let deleteTask = deleteTasksByAsanaGid(asanaGID);
             console.log("Nach dem Aufruf von deleteTasksByAsanaGid");
             console.log("Ergebnis von deleteTasksByAsanaGid:", deleteTask);

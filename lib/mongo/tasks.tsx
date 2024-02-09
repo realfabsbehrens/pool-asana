@@ -9,7 +9,9 @@ let tasks;
 async function init() {
   if (!db) {
     try {
+      console.log("Vor dem await clientPromise in init");
       client = await clientPromise;
+      console.log("Nach dem await clientPromise in init");
       db = await client.db("poool");
       tasks = await db.collection("projects");
       console.log("Database connected");

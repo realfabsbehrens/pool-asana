@@ -1,7 +1,6 @@
 // pages/api/webhook.js
 import crypto from "crypto";
 import { createHmac } from "crypto";
-import axios from "axios";
 import { deleteTasksByAsanaGid } from "@/lib/mongo/tasks";
 
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
@@ -34,9 +33,9 @@ export default async function handler(req, res) {
       } else {
         // Success
         res.status(200).end();
-        let asanaGID = req.body.events[0].resource.gid;
-        if (asanaGID) {
-          aufgabeloeschen(asanaGID);
+        if (req.body.events[0]) {
+          let asanaGID = req.body.events[0].resource.gid;
+          let delteTask = await aufgabeloeschen(asanaGID);
           console.log("Aufgabe wird gelöscht:");
           console.log(asanaGID);
         }
@@ -53,6 +52,7 @@ export default async function handler(req, res) {
 
 export async function aufgabeloeschen(asanaGID) {
   try {
+    console.log("funktion gefeuert");
     const result = await deleteTasksByAsanaGid(asanaGID);
     console.log(result);
   } catch (error) {

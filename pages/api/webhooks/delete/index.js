@@ -57,7 +57,7 @@ export async function getTasks() {
 }
 
 // Neue Funktion zum Löschen von Aufgaben mit einer bestimmten asana_gid
-export async function deleteTasksByAsanaGid(asanaGid) {
+ function deleteTasksByAsanaGid(asanaGid) {
   try {
     await init();
     console.log("Deleting task with Asana GID:", asanaGid);

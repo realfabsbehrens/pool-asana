@@ -8,7 +8,6 @@ const accessToken = process.env.ASANAKEY;
 
 // Global variable to store the x-hook-secret
 let secret = "";
-let asanaGID;
 
 export default async function handler(req, res) {
   try {
@@ -18,8 +17,11 @@ export default async function handler(req, res) {
       res.setHeader("X-Hook-Secret", secret);
       res.status(200).end();
     } else if (req.headers["x-hook-signature"]) {
+      // Ensure proper JSON parsing
+      const requestBody = JSON.stringify(req.body);
+
       const computedSignature = createHmac("SHA256", secret || "")
-        .update(JSON.stringify(req.body))
+        .update(requestBody)
         .digest("hex");
 
       if (
@@ -34,8 +36,9 @@ export default async function handler(req, res) {
         // Success
         res.status(200).end();
         if (req.body.events[0]) {
-          let asanaGID = req.body.events[0].resource.gid;
-          let delteTask = await aufgabeloeschen(asanaGID);
+          asanaGID = req.body.events[0].resource.gid;
+          // Use the global variable consistently
+          await aufgabeloeschen(asanaGID);
         }
       }
     } else {

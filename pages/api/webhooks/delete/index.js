@@ -1,41 +1,7 @@
 // pages/api/webhook.js
 import crypto from "crypto";
 import { createHmac } from "crypto";
-import clientPromise from ".";
-
-// value initieren
-let client;
-let db;
-let tasks;
-
-async function init() {
-  if (db) return;
-  try {
-    client = await clientPromise;
-    db = await client.db("poool");
-    tasks = await db.collection("projects");
-  } catch (error) {
-    throw new Error("Failted to stablish connection to database");
-  }
-}
-
-(async () => {
-  await init();
-})();
-
-// Neue Funktion zum Löschen von Aufgaben mit einer bestimmten asana_gid
-async function deleteTasksByAsanaGid(asanaGid) {
-  try {
-    console.log("Funktion gefeuert! ");
-    if (!tasks) await init();
-    console.log("Aufgabe wird gelöscht:");
-    console.log(asanaGID);
-    const result = await tasks.deleteOne({ asanaGID: asanaGid });
-    return { success: result.deletedCount > 0 };
-  } catch (error) {
-    return { error: "Failed to delete tasks!" };
-  }
-}
+import { deleteTasksByAsanaGid } from "@/lib/mongo/tasks";
 
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
@@ -69,7 +35,7 @@ export default async function handler(req, res) {
         res.status(200).end();
         if (req.body.events[0]) {
           let asanaGID = req.body.events[0].resource.gid;
-          let delteTask = deleteTasksByAsanaGid(asanaGID);
+          let delteTask = await aufgabeloeschen(asanaGID);
         }
       }
     } else {
@@ -79,5 +45,14 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error("Error in handler:", error.message);
     res.status(500).end();
+  }
+}
+
+export async function aufgabeloeschen(asanaGID) {
+  try {
+    const result = await deleteTasksByAsanaGid(asanaGID);
+    console.log(result);
+  } catch (error) {
+    console.error(error.message);
   }
 }

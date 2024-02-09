@@ -1,5 +1,4 @@
 // pages/api/webhook.js
-import clientPromise from ".";
 import crypto from "crypto";
 import { createHmac } from "crypto";
 import { init, deleteTest, deleteTasksByAsanaGid } from "@/lib/mongo/tasks";

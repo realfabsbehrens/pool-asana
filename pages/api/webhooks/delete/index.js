@@ -35,8 +35,6 @@ export default async function handler(req, res) {
         res.status(200).end();
         if (req.body.events[0]) {
           let asanaGID = req.body.events[0].resource.gid;
-          console.log("Aufgabe wird gelöscht:");
-          console.log(asanaGID);
           let delteTask = await aufgabeloeschen(asanaGID);
         }
       }
@@ -52,7 +50,6 @@ export default async function handler(req, res) {
 
 export async function aufgabeloeschen(asanaGID) {
   try {
-    console.log(asanaGID);
     const result = await deleteTasksByAsanaGid(asanaGID);
     console.log(result);
   } catch (error) {

@@ -32,8 +32,7 @@
     "react-dom": "^18",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
-    "mongodb": "^3.7.4",
-    "type": "module"
+    "mongodb": "^3.7.4"
   },
   "devDependencies": {
     "@types/mongodb": "^4.0.7",

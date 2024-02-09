@@ -9,9 +9,8 @@ let tasks;
 export async function init() {
   if (!db) {
     try {
-      console.log("Vor dem await clientPromise in init");
       client = await clientPromise;
-      console.log("Nach dem await clientPromise in init");
+
       db = client.db("poool");
       tasks = db.collection("projects");
       console.log("Database connected");

@@ -12,6 +12,7 @@ async function init() {
     client = await clientPromise;
     db = await client.db("poool");
     tasks = await db.collection("projects");
+    console.log("datenbank verbunden");
   } catch (error) {
     throw new Error("Failted to stablish connection to database");
   }

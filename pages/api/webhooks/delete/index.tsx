@@ -48,7 +48,7 @@ export default async function handler(req, res) {
 
             // Lösche die Aufgaben
             console.log("Vor dem Aufruf von deleteTasksByAsanaGid");
-            let deleteTask = await deleteTasksByAsanaGid(asanaGID);
+            let deleteTask = deleteTasksByAsanaGid(asanaGID);
             console.log("Nach dem Aufruf von deleteTasksByAsanaGid");
             console.log("Ergebnis von deleteTasksByAsanaGid:", deleteTask);
           } catch (error) {

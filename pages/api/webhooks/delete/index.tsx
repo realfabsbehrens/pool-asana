@@ -2,7 +2,7 @@
 
 import crypto from "crypto";
 import { createHmac } from "crypto";
-import { deleteTasksByAsanaGid } from "@/lib/mongo/tasks";
+import { init, deleteTasksByAsanaGid } from "@/lib/mongo/tasks";
 
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
@@ -39,8 +39,14 @@ export default async function handler(req, res) {
             "Response angekommen, Asana GID to be deleted:",
             asanaGID
           );
-          //  let asanaGID = req.body.events[0].resource.gid;
+
           try {
+            // Initialisiere die Datenbankverbindung
+            console.log("Vor dem Aufruf von init");
+            await init();
+            console.log("Nach dem Aufruf von init");
+
+            // Lösche die Aufgaben
             console.log("Vor dem Aufruf von deleteTasksByAsanaGid");
             let deleteTask = await deleteTasksByAsanaGid(asanaGID);
             console.log("Nach dem Aufruf von deleteTasksByAsanaGid");

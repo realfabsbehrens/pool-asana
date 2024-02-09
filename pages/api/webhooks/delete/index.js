@@ -1,8 +1,9 @@
 // pages/api/webhook.js
+
 import crypto from "crypto";
 import { createHmac } from "crypto";
 import { deleteTasksByAsanaGid } from "@/lib/mongo/tasks";
-import { test } from "@/lib/mongo/tasks";
+
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
 
@@ -40,7 +41,7 @@ export default async function handler(req, res) {
           );
           //  let asanaGID = req.body.events[0].resource.gid;
           try {
-            let deleteTask = await test(asanaGID);
+            let deleteTask = await deleteTasksByAsanaGid(asanaGID);
             console.log("Ergebnis von deleteTasksByAsanaGid:", deleteTask);
           } catch (error) {
             console.error(

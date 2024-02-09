@@ -58,14 +58,3 @@ export async function deleteTasksByAsanaGid(asanaGid) {
     return { error: "Failed to delete tasks!" };
   }
 }
-
-export async function test(asanaGid) {
-  try {
-    console.log("Deleting task with Asana GID:", asanaGid);
-    console.log("Deletion result:", result);
-    return { success: "juhu" };
-  } catch (error) {
-    console.error("Failed Test", error.message);
-    return { error: "Failed to delete Test" };
-  }
-}

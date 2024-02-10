@@ -2,6 +2,7 @@
 import crypto from "crypto";
 import { createHmac } from "crypto";
 import { DeleteTask } from "@/lib/mongodbneu";
+import { Result } from "postcss";
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
 
@@ -33,7 +34,7 @@ export default async function handler(req, res) {
         res.status(200).end();
         if (req.body.events[0]) {
           try {
-            DeleteTask("1206569946139805");
+            const loeschen = await DeleteTask("1206569946139805");
           } catch (error) {
             console.log(error);
           }

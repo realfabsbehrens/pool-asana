@@ -50,7 +50,7 @@ export default async function handler(req, res) {
               console.log("An error occurred while deleting ", error);
             }
           };
-          DeleteTask("1206569946139805");
+          await DeleteTask("1206569946139805");
         }
       }
     } else {

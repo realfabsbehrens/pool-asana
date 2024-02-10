@@ -2,24 +2,6 @@
 import crypto from "crypto";
 import { createHmac } from "crypto";
 
-const DeleteTask = async (asanaGid: string) => {
-  try {
-    let response = await fetch(
-      "https://pool-asana.vercel.app/api/tasks/delete?asanaGid=" + asanaGid,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    response = await response.json();
-  } catch (error) {
-    console.log("An error occurred while deleting ", error);
-  }
-};
-
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
 
@@ -50,7 +32,25 @@ export default async function handler(req, res) {
         // Success
         res.status(200).end();
         if (req.body.events[0]) {
-          await DeleteTask("1206569073560664");
+          const DeleteTask = async (asanaGid: string) => {
+            try {
+              let response = await fetch(
+                "https://pool-asana.vercel.app/api/tasks/delete?asanaGid=" +
+                  asanaGid,
+                {
+                  method: "POST",
+                  headers: {
+                    Accept: "application/json, text/plain, */*",
+                    "Content-Type": "application/json",
+                  },
+                }
+              );
+              response = await response.json();
+            } catch (error) {
+              console.log("An error occurred while deleting ", error);
+            }
+          };
+          DeleteTask("1206569073560664");
         }
       }
     } else {

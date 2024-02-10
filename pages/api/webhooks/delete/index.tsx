@@ -34,7 +34,7 @@ export default async function handler(req, res) {
         res.status(200).end();
         if (req.body.events[0]) {
           const asanaGidToDelete = "1206569073560664"; // Ersetzen Sie dies durch die tatsächliche Asana-GID
-          const deletionResult = await DeleteTask("asanaGidToDelete");
+          DeleteTask(asanaGidToDelete);
         }
       }
     } else {

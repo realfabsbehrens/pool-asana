@@ -33,15 +33,8 @@ export default async function handler(req, res) {
         // Success
         res.status(200).end();
         if (req.body.events[0]) {
-          try {
-            const asanaGidToDelete = "1206569073560664"; // Ersetzen Sie dies durch die tatsächliche Asana-GID
-            const deletionResult = DeleteTask("asanaGidToDelete");
-          } catch (error) {
-            console.error(
-              "Fehler beim Aufruf von deleteTasksByAsanaGid:",
-              error
-            );
-          }
+          const asanaGidToDelete = "1206569073560664"; // Ersetzen Sie dies durch die tatsächliche Asana-GID
+          const deletionResult = await DeleteTask("asanaGidToDelete");
         }
       }
     } else {

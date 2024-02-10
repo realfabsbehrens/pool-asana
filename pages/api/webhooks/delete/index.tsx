@@ -33,7 +33,7 @@ export default async function handler(req, res) {
         // Success
         res.status(200).end();
         if (req.body.events[0]) {
-          await DeleteTask("1206569073560664");
+          DeleteTask("1206569073560664");
         }
       }
     } else {

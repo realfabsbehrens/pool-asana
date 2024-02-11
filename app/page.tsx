@@ -1,5 +1,5 @@
 import Nav from "@/components/Nav";
-import Table from "@/components/table";
+import Tickets from "@/components/tickets";
 
 export default async function Home() {
   return (
@@ -7,7 +7,7 @@ export default async function Home() {
       <Nav />
 
       <section className="py-24 flex flex-col  justify-center  justify-items-center gap-8">
-        <Table />
+        <Tickets />
       </section>
     </main>
   );

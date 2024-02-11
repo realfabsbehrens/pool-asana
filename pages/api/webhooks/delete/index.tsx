@@ -33,7 +33,7 @@ export default async function handler(req, res) {
         res.status(200).end();
         if (req.body.events[0]) {
           try {
-            await DeleteTask("1206569946139805");
+            taskDelete();
           } catch (error) {
             console.log(error);
           }
@@ -49,7 +49,6 @@ export default async function handler(req, res) {
   }
 }
 
-// Your DeleteTask function remains unchanged
 export async function DeleteTask(asanaGid) {
   try {
     let response = await fetch(
@@ -66,4 +65,8 @@ export async function DeleteTask(asanaGid) {
   } catch (error) {
     console.log("An error occurred while deleting ", error);
   }
+}
+
+function taskDelete() {
+  DeleteTask("1206571452922211");
 }

@@ -25,6 +25,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import DeleteButton from "./deleteButton";
 
 function convertDateString(inputString: string): string {
   const dateObject = new Date(inputString);
@@ -105,7 +106,9 @@ const Tickets = () => {
                 <TableCell>{datumFormatiert}</TableCell>
                 <TableCell>{ticket.assignee}</TableCell>
                 <TableCell className={bgStatus}>{ticket.status}</TableCell>
-                <TableCell className="text-right flex flex-row"> </TableCell>
+                <TableCell className="text-right flex flex-row">
+                  <DeleteButton asanaGID={ticket.asanaGID} />
+                </TableCell>
               </TableRow>
             );
           })}

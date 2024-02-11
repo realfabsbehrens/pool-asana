@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { DeleteTask } from "@/lib/mongodbneu";
 import { TrashIcon } from "@radix-ui/react-icons";
@@ -13,7 +15,23 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-export default function DeleteButton() {
+export default function DeleteButton({ asanaGID }) {
+  const handleDeletePost = async () => {
+    try {
+      let response = await fetch("./api/tasks/delete?asanaGid=" + asanaGID, {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+      });
+      response = await response.json();
+      window.location.reload();
+    } catch (error) {
+      console.log("An error occurred while deleting ", error);
+    }
+  };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -30,7 +48,7 @@ export default function DeleteButton() {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>abbrechen</AlertDialogCancel>
-          <AlertDialogAction onClick={DeleteTask("1206571654274343")}>
+          <AlertDialogAction onClick={handleDeletePost}>
             löschen
           </AlertDialogAction>
         </AlertDialogFooter>

@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       } else {
         if (req.body.events[0]) {
           try {
-            console.log(JSON.stringify(req.body.events));
+            console.log(JSON.stringify(req.body.events[0].task));
           } catch (error) {
             console.log(error);
           }

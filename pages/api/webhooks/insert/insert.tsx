@@ -2,7 +2,6 @@
 import crypto from "crypto";
 import { createHmac } from "crypto";
 import { DeleteTask } from "@/lib/mongodb";
-import { json } from "stream/consumers";
 
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
@@ -31,8 +30,27 @@ export default async function handler(req, res) {
         // Fail
         res.status(401).end();
       } else {
+        if (req.body.events[0]) {
+          try {
+            const asanaGID = req.body.events[0].resource.gid;
+            console.log(
+              "Neues Webhook Event: lösche Aufgabe: ",
+              req.body.events[0].resource.gid
+            );
+            await DeleteTask(asanaGID);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+
         // Success
         res.status(200).end();
+        if (req.body.events[0]) {
+          try {
+          } catch (error) {
+            console.log(error);
+          }
+        }
       }
     } else {
       console.error("Invalid request");

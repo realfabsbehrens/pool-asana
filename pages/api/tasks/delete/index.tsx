@@ -1,6 +1,6 @@
 import clientPromise from "@/lib/mongodbneu";
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   try {
     const client = await clientPromise;
     const db = client.db("poool");
@@ -12,7 +12,7 @@ export default async (req, res) => {
 
     res.json(post);
   } catch (e) {
-    console.error(e);
-    throw new Error(e).message;
+    console.error("Error in MongoDB delete operation:", e);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-};
+}

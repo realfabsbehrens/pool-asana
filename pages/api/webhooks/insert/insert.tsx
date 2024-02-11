@@ -41,12 +41,6 @@ export default async function handler(req, res) {
 
         // Success
         res.status(200).end();
-        if (req.body.events[0]) {
-          try {
-          } catch (error) {
-            console.log(error);
-          }
-        }
       }
     } else {
       console.error("Invalid request");

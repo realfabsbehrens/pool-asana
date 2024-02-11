@@ -13,7 +13,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-export default async function DeleteButton() {
+export default function DeleteButton() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -29,8 +29,10 @@ export default async function DeleteButton() {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>löschen</AlertDialogCancel>
-          <AlertDialogAction>abbrechen</AlertDialogAction>
+          <AlertDialogCancel>abbrechen</AlertDialogCancel>
+          <AlertDialogAction onClick={DeleteTask("1206571654274343")}>
+            löschen
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

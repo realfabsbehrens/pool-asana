@@ -17,13 +17,16 @@ import {
 export default function DeleteButton({ asanaGID }) {
   const handleDeletePost = async () => {
     try {
-      let response = await fetch("@/api/tickets/delete?asanaGid=" + asanaGID, {
-        method: "POST",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-      });
+      let response = await fetch(
+        "https://pool-asana.vercel.app/api/tickets/delete?asanaGid=" + asanaGID,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+        }
+      );
       response = await response.json();
       window.location.reload();
     } catch (error) {

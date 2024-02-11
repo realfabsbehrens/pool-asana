@@ -29,7 +29,9 @@ const Tickets = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const response = await fetch("@/api/tickets/getTickets");
+        const response = await fetch(
+          "https://pool-asana.vercel.app/api/tickets/getTickets"
+        );
         const data = await response.json();
         setTickets(data);
       } catch (error) {

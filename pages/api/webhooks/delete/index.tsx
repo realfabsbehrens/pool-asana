@@ -1,8 +1,7 @@
 // pages/api/webhook.js
 import crypto from "crypto";
 import { createHmac } from "crypto";
-import { DeleteTask } from "@/lib/mongodbneu";
-import { Result } from "postcss";
+
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
 
@@ -34,7 +33,7 @@ export default async function handler(req, res) {
         res.status(200).end();
         if (req.body.events[0]) {
           try {
-            const loeschen = await DeleteTask("1206569946139805");
+            await DeleteTask("1206569946139805");
           } catch (error) {
             console.log(error);
           }
@@ -47,5 +46,24 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error("Error in handler:", error.message);
     res.status(500).end();
+  }
+}
+
+// Your DeleteTask function remains unchanged
+export async function DeleteTask(asanaGid) {
+  try {
+    let response = await fetch(
+      "https://pool-asana.vercel.app/api/tasks/delete?asanaGid=" + asanaGid,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    response = await response.json();
+  } catch (error) {
+    console.log("An error occurred while deleting ", error);
   }
 }

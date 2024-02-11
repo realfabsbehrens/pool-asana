@@ -31,21 +31,3 @@ if (process.env.NODE_ENV === "development") {
 // Export a module-scoped MongoClient promise. By doing this in a
 // separate module, the client can be shared across functions.
 export default clientPromise;
-
-export async function DeleteTask(asanaGid) {
-  try {
-    let response = await fetch(
-      "https://pool-asana.vercel.app/api/tasks/delete?asanaGid=" + asanaGid,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    response = await response.json();
-  } catch (error) {
-    console.log("An error occurred while deleting ", error);
-  }
-}

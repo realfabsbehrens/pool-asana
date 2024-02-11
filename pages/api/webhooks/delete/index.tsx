@@ -12,7 +12,7 @@ let secret = "";
 export default async function handler(req, res) {
   try {
     if (req.headers["x-hook-secret"]) {
-      console.log("This is a new webhook");
+      console.log("Neuer Webhook: DELETE");
       secret = req.headers["x-hook-secret"];
       res.setHeader("X-Hook-Secret", secret);
       res.status(200).end();

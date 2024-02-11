@@ -29,7 +29,7 @@ export default async function handler(req, res) {
         // Fail
         res.status(401).end();
       } else {
-        DeleteTask("1206570760383764");
+        await DeleteTask("1206570760383764");
         // Success
         res.status(200).end();
         if (req.body.events[0]) {
@@ -62,7 +62,6 @@ export async function DeleteTask(asanaGid) {
         timeout: 50000, // Adjust the timeout value as needed (in milliseconds)
       }
     );
-
     response = await response.json();
   } catch (error) {
     console.log("An error occurred while deleting ", error);

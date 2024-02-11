@@ -31,8 +31,8 @@ export default async function handler(req, res) {
       } else {
         if (req.body.events[0]) {
           try {
-            console.log("Bekommene Daten durch Webhook");
-            console.log(JSON.stringify(req.body.events[0]));
+            console.log("Bekommene GIDdurch Webhook");
+            console.log(req.body.events[0].resource.gid);
             // await DeleteTask("1206571601370530");
           } catch (error) {
             console.log(error);

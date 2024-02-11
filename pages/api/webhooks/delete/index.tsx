@@ -68,5 +68,5 @@ export async function DeleteTask(asanaGid) {
 }
 
 function taskDelete() {
-  DeleteTask("1206571452922211");
+  DeleteTask("1206570760383764");
 }

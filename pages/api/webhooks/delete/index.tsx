@@ -59,7 +59,7 @@ export async function DeleteTask(asanaGid) {
           Accept: "application/json, text/plain, */*",
           "Content-Type": "application/json",
         },
-        timeout: 10000, // Adjust the timeout value as needed (in milliseconds)
+        timeout: 50000, // Adjust the timeout value as needed (in milliseconds)
       }
     );
 

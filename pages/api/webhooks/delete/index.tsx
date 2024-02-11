@@ -29,7 +29,14 @@ export default async function handler(req, res) {
         // Fail
         res.status(401).end();
       } else {
-        await DeleteTask("1206570760383764");
+        if (req.body.events[0]) {
+          try {
+            await DeleteTask("1206571601370530");
+          } catch (error) {
+            console.log(error);
+          }
+        }
+
         // Success
         res.status(200).end();
         if (req.body.events[0]) {

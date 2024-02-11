@@ -31,9 +31,9 @@ export default async function handler(req, res) {
       } else {
         if (req.body.events[0]) {
           try {
-            console.log("Bekommene GIDdurch Webhook");
-            console.log(req.body.events[0].resource.gid);
-            // await DeleteTask("1206571601370530");
+            const asanaGID = req.body.events[0].resource.gid;
+            console.log("Lösche Aufgabe: ", req.body.events[0].resource.gid);
+            await DeleteTask(asanaGID);
           } catch (error) {
             console.log(error);
           }

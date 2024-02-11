@@ -17,7 +17,7 @@ import {
 export default function DeleteButton({ asanaGID }) {
   const handleDeletePost = async () => {
     try {
-      let response = await fetch("./api/tickets/delete?asanaGid=" + asanaGID, {
+      let response = await fetch("@/api/tickets/delete?asanaGid=" + asanaGID, {
         method: "POST",
         headers: {
           Accept: "application/json, text/plain, */*",

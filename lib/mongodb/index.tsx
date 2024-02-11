@@ -36,7 +36,7 @@ export default clientPromise;
 
 export async function DeleteTask(asanaGid) {
   try {
-    let response = await fetch("./api/tickets/delete?asanaGid=" + asanaGid, {
+    let response = await fetch("@/api/tickets/delete?asanaGid=" + asanaGid, {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",

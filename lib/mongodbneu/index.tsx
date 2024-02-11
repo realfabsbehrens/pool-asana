@@ -33,3 +33,22 @@ if (process.env.NODE_ENV === "development") {
 export default clientPromise;
 
 // Your DeleteTask function remains unchanged
+
+export async function DeleteTask(asanaGid) {
+  try {
+    let response = await fetch(
+      "https://pool-asana.vercel.app/api/tasks/delete?asanaGid=" + asanaGid,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        timeout: 50000, // Adjust the timeout value as needed (in milliseconds)
+      }
+    );
+    response = await response.json();
+  } catch (error) {
+    console.log("An error occurred while deleting ", error);
+  }
+}

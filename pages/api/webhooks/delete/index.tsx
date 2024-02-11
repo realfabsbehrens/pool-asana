@@ -1,7 +1,7 @@
 // pages/api/webhook.js
 import crypto from "crypto";
 import { createHmac } from "crypto";
-import { DeleteTask } from "@/lib/mongodbneu";
+import { DeleteTask } from "@/lib/mongodb";
 
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;

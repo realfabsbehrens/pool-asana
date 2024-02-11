@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-
 import {
   Table,
   TableBody,
@@ -10,22 +9,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MixerHorizontalIcon, TrashIcon } from "@radix-ui/react-icons";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import DeleteButton from "./deleteButton";
+import ChangeButton from "./changeButton";
 
 function convertDateString(inputString: string): string {
   const dateObject = new Date(inputString);
@@ -69,13 +54,14 @@ const Tickets = () => {
               <p> verantwortlich </p>
             </TableHead>
             <TableHead>status</TableHead>
-            <TableHead className="text-right w-fit"></TableHead>
+            <TableHead className="text-right w-36"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {tickets.map((ticket) => {
-            let bgStatus;
+            const datumFormatiert = convertDateString(ticket.termin);
 
+            let bgStatus;
             switch (ticket.status) {
               case "Freigabe Projektleiter":
                 bgStatus = "bg-green-100 dark:bg-transparent ";
@@ -87,14 +73,12 @@ const Tickets = () => {
                 bgStatus = "bg-cyan-100 dark:bg-transparent ";
                 break;
               case "On Hold":
-                bgStatus = "bg-red-100 dark:bg-transparent";
+                bgStatus = "bg-red-100  dark:bg-transparent";
                 break;
               default:
                 bgStatus = "bg-transparent";
                 break;
             }
-
-            const datumFormatiert = convertDateString(ticket.termin);
 
             return (
               <TableRow className={`hover:shadow-md`} key={ticket._id}>
@@ -107,6 +91,7 @@ const Tickets = () => {
                 <TableCell>{ticket.assignee}</TableCell>
                 <TableCell className={bgStatus}>{ticket.status}</TableCell>
                 <TableCell className="text-right flex flex-row">
+                  <ChangeButton ticket={ticket}></ChangeButton>
                   <DeleteButton asanaGID={ticket.asanaGID} />
                 </TableCell>
               </TableRow>

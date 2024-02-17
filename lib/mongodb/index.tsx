@@ -52,3 +52,22 @@ export async function DeleteTask(asanaGid) {
     console.log("An error occurred while deleting ", error);
   }
 }
+
+export async function getTask(asanaGid) {
+  try {
+    let response = await fetch(
+      "https://pool-asana.vercel.app/api/tickets/delete?asanaGid=" + asanaGid,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        timeout: 50000, // Adjust the timeout value as needed (in milliseconds)
+      }
+    );
+    response = await response.json();
+  } catch (error) {
+    console.log("An error occurred while deleting ", error);
+  }
+}

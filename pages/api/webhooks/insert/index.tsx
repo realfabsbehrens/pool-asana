@@ -32,6 +32,8 @@ export default async function handler(req, res) {
         if (req.body) {
           try {
             console.log(JSON.stringify(req.body));
+            console.log(JSON.stringify(req.body));
+            console.log(JSON.stringify(req.body));
           } catch (error) {
             console.log(error);
           }

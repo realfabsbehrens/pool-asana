@@ -47,7 +47,7 @@ export default function changeButton({ ticket }) {
           </div>
         </div>
 
-        <div className="flex items-center  border-b-2 space-x-2 my-5 ml-80 mr-80"></div>
+        <div className="flex items-center  border-b-2 space-x-2 my-3 ml-20 mr-20"></div>
 
         <div className="flex items-center  space-x-2">
           <div className="grid flex-1 gap-2">

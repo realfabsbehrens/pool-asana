@@ -37,22 +37,23 @@ export default function changeButton({ ticket }) {
 						</Label>
 						<Input id='ticketname' defaultValue={ticket.name} />
 					</div>
-					<div className='grid flex-3 gap-2'>
-						<Label htmlFor='ticketnummer' className=''>
-							Ticketnummer
-						</Label>
-
-						<Input id='ticketnummer' readOnly defaultValue={ticket.nummer} />
-					</div>
-				</div>
-				<div className='flex items-center space-x-2'>
 					<div className='grid flex-1 gap-2'>
 						<Label htmlFor='verantwortlicher' className=''>
 							Verantwortlicher
 						</Label>
 						<Input id='verantwortlicher' defaultValue={ticket.assignee} />
 					</div>
-					<div className='grid flex-3 gap-2'>
+				</div>
+				<div className='flex items-center space-x-2'>
+					<div className='grid flex-1 gap-2'>
+						<Label htmlFor='ticketnummer' className=''>
+							Ticketnummer
+						</Label>
+
+						<Input id='ticketnummer' readOnly defaultValue={ticket.nummer} />
+					</div>
+
+					<div className='grid flex-1 gap-2'>
 						<Label htmlFor='kunde' className=''>
 							Kunde
 						</Label>

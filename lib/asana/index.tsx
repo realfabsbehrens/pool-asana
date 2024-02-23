@@ -13,6 +13,7 @@ export async function getAsanaTask() {
   };
   tasksApiInstance.getTask(task_gid, opts).then(
     (result) => {
+      console.log("test");
       console.log(
         "API called successfully. Returned data: " +
           JSON.stringify(result.data, null, 2)

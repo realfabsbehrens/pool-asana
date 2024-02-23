@@ -73,7 +73,7 @@ export default function changeButton({ ticket }) {
           </div>
         </div>
 
-        <DialogFooter className="sm:justify-start">
+        <DialogFooter className="sm:justify-start justify-between">
           <DialogClose asChild>
             <Button type="button" variant="secondary">
               schliessen

@@ -33,7 +33,7 @@ export default async function handler(req, res) {
         if (req.body) {
           try {
             console.log(JSON.stringify(req.body));
-            getAsanaTask();
+            await getAsanaTask();
           } catch (error) {
             console.log(error);
           }

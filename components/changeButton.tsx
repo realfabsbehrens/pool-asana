@@ -29,21 +29,6 @@ export default function changeButton({ ticket }) {
             hier können alle einstellungen des tickets geändert werden.
           </DialogDescription>
         </DialogHeader>
-
-        <div className="flex items-center space-x-2">
-          <div className="grid flex-1 gap-2">
-            <Label htmlFor="ticketname" className="">
-              Ticketname
-            </Label>
-            <Input id="ticketname" defaultValue={ticket.name} />
-          </div>
-          <div className="grid flex-1 gap-2">
-            <Label htmlFor="verantwortlicher" className="">
-              Verantwortlicher
-            </Label>
-            <Input id="verantwortlicher" defaultValue={ticket.assignee} />
-          </div>
-        </div>
         <div className="flex items-center space-x-2">
           <div className="grid flex-1 gap-2">
             <Label htmlFor="ticketnummer" className="">
@@ -61,6 +46,24 @@ export default function changeButton({ ticket }) {
             <Input id="kunde" readOnly defaultValue={ticket.project} />
           </div>
         </div>
+
+        <div className="flex items-center space-x-2"></div>
+
+        <div className="flex items-center  border-b-2 space-x-2">
+          <div className="grid flex-1 gap-2">
+            <Label htmlFor="ticketname" className="">
+              Ticketname
+            </Label>
+            <Input id="ticketname" defaultValue={ticket.name} />
+          </div>
+          <div className="grid flex-1 gap-2">
+            <Label htmlFor="verantwortlicher" className="">
+              Verantwortlicher
+            </Label>
+            <Input id="verantwortlicher" defaultValue={ticket.assignee} />
+          </div>
+        </div>
+
         <div className="flex items-center space-x-2">
           <div className="grid flex-1 gap-2">
             <Label htmlFor="tickettext" className="">

@@ -24,13 +24,7 @@ export default function changeButton({ ticket }) {
 			</DialogTrigger>
 			<DialogContent className='sm:max-w-4xl'>
 				<DialogHeader>
-					<DialogTitle>
-						Ticket bearbeiten{' '}
-						<Label htmlFor='ticketnummer' className=''>
-							Ticketnummer
-						</Label>
-						<Input id='ticketnummer' readOnly defaultValue={ticket.nummer} />
-					</DialogTitle>
+					<DialogTitle>Ticket bearbeiten</DialogTitle>
 					<DialogDescription>
 						hier können alle einstellungen des tickets geändert werden.
 					</DialogDescription>
@@ -49,6 +43,21 @@ export default function changeButton({ ticket }) {
 						</Label>
 
 						<Input id='ticketnummer' readOnly defaultValue={ticket.nummer} />
+					</div>
+				</div>
+				<div className='flex items-center space-x-2'>
+					<div className='grid flex-1 gap-2'>
+						<Label htmlFor='verantwortlicher' className=''>
+							Verantwortlicher
+						</Label>
+						<Input id='verantwortlicher' defaultValue={ticket.assignee} />
+					</div>
+					<div className='grid flex-3 gap-2'>
+						<Label htmlFor='kunde' className=''>
+							Kunde
+						</Label>
+
+						<Input id='kunde' readOnly defaultValue={ticket.project} />
 					</div>
 				</div>
 				<div className='flex items-center space-x-2'>

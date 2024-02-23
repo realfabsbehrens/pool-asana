@@ -78,8 +78,8 @@ export default function changeButton({ ticket }) {
             <Button type="button" variant="secondary">
               schliessen
             </Button>
-            <Button type="submit">Speichern</Button>
           </DialogClose>
+          <Button type="submit">Speichern</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

@@ -32,8 +32,9 @@ export default async function handler(req, res) {
       } else {
         if (req.body) {
           try {
-            // console.log(JSON.stringify(req.body));
-            await getAsanaTask();
+            const asanaGID = req.body.events[0].resource.gid;
+            console.log(asanaGID);
+            await getAsanaTask(asanaGID);
           } catch (error) {
             console.log(error);
           }

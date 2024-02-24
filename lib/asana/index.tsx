@@ -1,3 +1,5 @@
+import { insertTask } from "@/lib/mongodb";
+
 const Asana = require("asana");
 
 let client = Asana.ApiClient.instance;
@@ -11,6 +13,19 @@ export async function getAsanaTask(asanaGID) {
   };
   tasksApiInstance.getTask(asanaGID, opts).then(
     (result) => {
+      const taskData = {
+        name: "Sample Task nach get",
+        assignee: "John Doe",
+        workspace: "Workplace",
+        asanaGID: "123456",
+        nummer: "Task123",
+        project: "ProjectXYZ",
+        status: "In Progress",
+        termin: "2024-02-11",
+      };
+      insertTask(taskData);
+      //
+
       console.log(
         "API called successfully. Returned data: " +
           JSON.stringify(result.data, null, 2)

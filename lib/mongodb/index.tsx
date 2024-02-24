@@ -53,18 +53,7 @@ export async function DeleteTask(asanaGid) {
   }
 }
 
-const taskData = {
-  name: "Sample Task",
-  assignee: "John Doe",
-  workspace: "Workplace",
-  asanaGID: "123456",
-  nummer: "Task123",
-  project: "ProjectXYZ",
-  status: "In Progress",
-  termin: "2024-02-11",
-};
-
-export async function insertTask() {
+export async function insertTask(taskData) {
   try {
     let response = await fetch(
       "https://pool-asana.vercel.app/api/tickets/add",

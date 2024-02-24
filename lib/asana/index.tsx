@@ -14,7 +14,7 @@ export async function getAsanaTask(asanaGID) {
   tasksApiInstance.getTask(asanaGID, opts).then(
     (result) => {
       const taskData = {
-        name: "Sample Task nach get",
+        name: result.data.name,
         assignee: "John Doe",
         workspace: "Workplace",
         asanaGID: "123456",

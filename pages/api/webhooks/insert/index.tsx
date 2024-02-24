@@ -2,7 +2,7 @@
 import crypto from "crypto";
 import { createHmac } from "crypto";
 import { getAsanaTask } from "@/lib/asana";
-
+import { insertTask } from "@/lib/mongodb";
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
 
@@ -34,7 +34,8 @@ export default async function handler(req, res) {
           try {
             const asanaGID = req.body.events[0].resource.gid;
             console.log(asanaGID);
-            await getAsanaTask(asanaGID);
+            await insertTask();
+            //  await getAsanaTask(asanaGID);
           } catch (error) {
             console.log(error);
           }

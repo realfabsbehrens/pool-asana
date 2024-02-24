@@ -53,6 +53,37 @@ export async function DeleteTask(asanaGid) {
   }
 }
 
+const taskData = {
+  name: "Sample Task",
+  assignee: "John Doe",
+  workspace: "Workplace",
+  asanaGID: "123456",
+  nummer: "Task123",
+  project: "ProjectXYZ",
+  status: "In Progress",
+  termin: "2024-02-11",
+};
+
+export async function insertTask() {
+  try {
+    let response = await fetch(
+      "https://pool-asana.vercel.app/api/tickets/add",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(taskData), // Add your payload here
+        timeout: 50000, // Adjust the timeout value as needed (in milliseconds)
+      }
+    );
+    response = await response.json();
+  } catch (error) {
+    console.log("An error occurred while adding ", error);
+  }
+}
+
 export async function getTask(asanaGid) {
   try {
     let response = await fetch(

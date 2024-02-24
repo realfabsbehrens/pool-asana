@@ -6,6 +6,17 @@ let client = Asana.ApiClient.instance;
 let token = client.authentications["token"];
 token.accessToken = process.env.ASANAKEY;
 
+let taskData = {
+  name: "Name Fehlt!",
+  assignee: "moin@fabsbehrens,de",
+  workspace: "Workplace",
+  asanaGID: "",
+  nummer: "Ticket Nummer fehlt!",
+  project: "Peojekt fehlt!",
+  status: "In Arbeit",
+  termin: "2024-02-11",
+};
+
 export async function getAsanaTask(asanaGID) {
   let tasksApiInstance = new Asana.TasksApi();
   let opts = {
@@ -17,7 +28,7 @@ export async function getAsanaTask(asanaGID) {
         name: result.data.name,
         assignee: "John Doe",
         workspace: "Workplace",
-        asanaGID: "123456",
+        asanaGID: "",
         nummer: "Task123",
         project: "ProjectXYZ",
         status: "In Progress",

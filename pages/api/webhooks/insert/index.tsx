@@ -30,9 +30,9 @@ export default async function handler(req, res) {
         // Fail
         res.status(401).end();
       } else {
-        if (req.body.events) {
+        if (req.body.events[0].resource.gid) {
           try {
-            const asanaGID = req.body.events.resource.gid;
+            const asanaGID = req.body.events[0].resource.gid;
             console.log(asanaGID);
             await getAsanaTask(asanaGID);
           } catch (error) {

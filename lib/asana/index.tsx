@@ -45,7 +45,6 @@ export async function getAsanaTask(asanaGID) {
 export async function getAndDeleteTask(asanaGID) {
   try {
     // Adding a 2-second delay before calling getAsanaTask
-    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const response = await getAsanaTask(asanaGID);
 

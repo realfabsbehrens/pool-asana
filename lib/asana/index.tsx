@@ -13,8 +13,6 @@ export async function getAsanaTask(asanaGID) {
   };
   tasksApiInstance.getTask(asanaGID, opts).then(
     (result) => {
-      const name = result.data.name;
-      console.log(name);
       const taskData = {
         name: "test",
         assignee: "John Doe",
@@ -27,7 +25,7 @@ export async function getAsanaTask(asanaGID) {
       };
       insertTask(taskData);
       //
-
+      console.log(result.data.name);
       console.log(
         "API called successfully. Returned data: " +
           JSON.stringify(result.data, null, 2)

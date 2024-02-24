@@ -5,7 +5,7 @@ export default async (req, res) => {
     const client = await clientPromise;
     const db = client.db("poool");
     const {
-      asanaGID, // Assuming asanaGID is the unique identifier for the document
+      asanaGID,
       name,
       assignee,
       workspace,
@@ -32,11 +32,11 @@ export default async (req, res) => {
     const result = await db.collection("projects").updateOne(filter, updateDoc);
 
     if (result.modifiedCount === 0) {
-      res.status(404).json({ error: "Document not found" });
+      res.status(404).json({ error: "Fehler! Ticket wurde nicht gefunden!" });
       return;
     }
 
-    res.json({ success: true, message: "Document updated successfully" });
+    res.json({ success: true, message: "Ticket erfolgreich aktualisiert." });
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: e.message });

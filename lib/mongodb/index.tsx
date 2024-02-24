@@ -91,3 +91,30 @@ export async function getTask(asanaGid) {
     console.log("An error occurred while deleting ", error);
   }
 }
+
+export async function updateTask(taskData) {
+  try {
+    const response = await fetch(
+      "https://pool-asana.vercel.app/api/tasks/update", // Adjust the URL to your task update endpoint
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(taskData),
+        timeout: 50000,
+      }
+    );
+
+    if (!response.ok) {
+      // Handle non-successful response
+      throw new Error(`Failed to update task. Status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log("Task updated successfully:", result);
+  } catch (error) {
+    console.error("An error occurred while updating task:", error.message);
+  }
+}

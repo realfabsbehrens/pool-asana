@@ -24,16 +24,19 @@ export async function getAsanaTask(asanaGID) {
   };
   tasksApiInstance.getTask(asanaGID, opts).then(
     (result) => {
-      let taskData = {
-        name: result.data.name,
-        assignee: "John Doe",
-        workspace: "Workplace",
-        asanaGID: "",
-        nummer: "Task123",
-        project: "ProjectXYZ",
-        status: "In Progress",
-        termin: "2024-02-11",
-      };
+      if (result.data.name) {
+        let taskData = {
+          name: result.data.name,
+          assignee: "John Doe",
+          workspace: "Workplace",
+          asanaGID: "",
+          nummer: "Task123",
+          project: "ProjectXYZ",
+          status: "In Progress",
+          termin: "2024-02-11",
+        };
+      }
+
       insertTask(taskData);
       //
       console.log(result.data.name);

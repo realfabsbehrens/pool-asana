@@ -50,7 +50,7 @@ export async function getAndDeleteTask(asanaGID) {
         name: response.data.name,
         assignee: "John Doe",
         workspace: "Workplace",
-        asanaGID: "",
+        asanaGID: response.data.gid,
         nummer: "Task123",
         project: "ProjectXYZ",
         status: "In Progress",

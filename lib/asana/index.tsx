@@ -6,6 +6,17 @@ let client = Asana.ApiClient.instance;
 let token = client.authentications["token"];
 token.accessToken = process.env.ASANAKEY;
 
+let taskData = {
+  name: "Name fehlt!",
+  assignee: "John Doe",
+  workspace: "Workplace",
+  asanaGID: "",
+  nummer: "Task123",
+  project: "ProjectXYZ",
+  status: "In Progress",
+  termin: "2024-02-11",
+};
+
 export async function getAsanaTask(asanaGID) {
   return new Promise((resolve, reject) => {
     let tasksApiInstance = new Asana.TasksApi();
@@ -34,7 +45,20 @@ export async function getAndDeleteTask(asanaGID) {
   try {
     const response = await getAsanaTask(asanaGID);
     console.log(response);
-    // Hier kannst du auf die Antwort zugreifen.
+    if (response.data.name) {
+      let taskData = {
+        name: response.data.name,
+        assignee: "John Doe",
+        workspace: "Workplace",
+        asanaGID: "",
+        nummer: "Task123",
+        project: "ProjectXYZ",
+        status: "In Progress",
+        termin: "2024-02-11",
+      };
+    }
+
+    insertTask(taskData);
   } catch (error) {
     console.error(error.response.body);
   }

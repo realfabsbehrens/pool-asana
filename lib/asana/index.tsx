@@ -21,14 +21,14 @@ export async function getAsanaTask(asanaGID) {
   return new Promise((resolve, reject) => {
     let tasksApiInstance = new Asana.TasksApi();
     let opts = {
-      opt_fields: "assignee,html_notes,name,notes",
+      opt_fields:
+        "name,assignee.name,notes,due_on,custom_fields.name,custom_fields.enum_value.name,custom_fields.text_value",
     };
 
     tasksApiInstance.getTask(asanaGID, opts).then(
       (result) => {
-        console.log(result.data.name);
         console.log(
-          "API called successfully. Returned data: " +
+          "Asana API called successfully. Returned data: " +
             JSON.stringify(result.data, null, 2)
         );
         resolve(result); // Hier wird das Promise erfolgreich aufgelöst.
@@ -44,7 +44,6 @@ export async function getAsanaTask(asanaGID) {
 export async function getAndDeleteTask(asanaGID) {
   try {
     const response = await getAsanaTask(asanaGID);
-    console.log(response);
     if (response.data.name) {
       let taskData = {
         name: response.data.name,

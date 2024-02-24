@@ -8,7 +8,7 @@ token.accessToken = process.env.ASANAKEY;
 
 let taskData = {
   name: "Name fehlt!",
-  assignee: "John Doe",
+  assignee: "nicht zugewiesen",
   workspace: "Workplace",
   asanaGID: "",
   nummer: "Task123",
@@ -40,10 +40,13 @@ export async function getAsanaTask(asanaGID) {
     );
   });
 }
-
 export async function getAndDeleteTask(asanaGID) {
   try {
+    // Adding a 2-second delay before calling getAsanaTask
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     const response = await getAsanaTask(asanaGID);
+
     if (response.data.gid) {
       const asanaGID = response.data.gid;
       const assignee = response.data.assignee.name;

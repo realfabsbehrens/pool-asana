@@ -13,8 +13,10 @@ export async function getAsanaTask(asanaGID) {
   };
   tasksApiInstance.getTask(asanaGID, opts).then(
     (result) => {
+      const name = result.data.name;
+      console.log(name);
       const taskData = {
-        name: result.data.name,
+        name: "test",
         assignee: "John Doe",
         workspace: "Workplace",
         asanaGID: "123456",

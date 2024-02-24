@@ -56,9 +56,9 @@ export async function getAndDeleteTask(asanaGID) {
         status: "In Progress",
         termin: "2024-02-11",
       };
-    }
 
-    insertTask(taskData);
+      await insertTask(taskData);
+    }
   } catch (error) {
     console.error(error.response.body);
   }

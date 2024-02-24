@@ -34,7 +34,7 @@ export default async function handler(req, res) {
           try {
             const asanaGID = req.body.events[0].resource.gid;
             console.log(asanaGID);
-            insertTask();
+            await insertTask();
             //  await getAsanaTask(asanaGID);
           } catch (error) {
             console.log(error);

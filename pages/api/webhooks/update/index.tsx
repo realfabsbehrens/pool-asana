@@ -12,7 +12,7 @@ let secret = "";
 export default async function handler(req, res) {
   try {
     if (req.headers["x-hook-secret"]) {
-      console.log("Neuer Webhook: INSERT");
+      console.log("Neuer Webhook: UPDATE");
       secret = req.headers["x-hook-secret"];
       res.setHeader("X-Hook-Secret", secret);
       res.status(200).end();
@@ -32,10 +32,7 @@ export default async function handler(req, res) {
       } else {
         if (req.body.events[0].resource.gid) {
           try {
-            const asanaGID = req.body.events[0].resource.gid;
-            console.log(asanaGID);
-            await getAndDeleteTask(asanaGID);
-            // await getAsanaTask(asanaGID);
+            console.log(req.body.events[0].resource.gid);
           } catch (error) {
             console.log(error);
           }

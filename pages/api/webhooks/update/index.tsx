@@ -34,7 +34,7 @@ export default async function handler(req, res) {
           try {
             let asanaGID = req.body.events[0].resource.gid;
             console.log(asanaGID);
-
+            console.log(req.body.events[0]);
             let taskData = {
               name: "updated",
               assignee: "moin@fabsbehrens.de",

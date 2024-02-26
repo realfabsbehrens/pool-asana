@@ -31,7 +31,7 @@ export default async function handler(req, res) {
         if (req.body.events[0].resource.gid) {
           try {
             console.log("neue aufgabe");
-            console.log(asanaGID);
+            console.log(JSON.stringify(req.body));
           } catch (error) {
             console.log(error);
           }

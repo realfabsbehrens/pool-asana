@@ -65,7 +65,7 @@ export async function getAndDeleteTask(asanaGID) {
       const name = response.data.name;
 
       let taskData = {
-        name: name,
+        name: "",
         assignee: assignee,
         workspace: "Workplace",
         asanaGID: asanaGID,

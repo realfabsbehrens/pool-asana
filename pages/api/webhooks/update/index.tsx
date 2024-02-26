@@ -1,8 +1,8 @@
 // pages/api/webhook.js
 import crypto from "crypto";
 import { createHmac } from "crypto";
-import { getAsanaTask } from "@/lib/asana";
-import { getAndDeleteTask } from "@/lib/asana";
+import { updateTask } from "@/lib/mongodb";
+
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
 
@@ -30,9 +30,23 @@ export default async function handler(req, res) {
         // Fail
         res.status(401).end();
       } else {
-        if (req.body.events[0]) {
+        if (req.body.events[0].resource.gid) {
           try {
-            console.log(JSON.stringify(req.body.events[0]));
+            let asanaGID = req.body.events[0].resource.gid;
+            console.log(asanaGID);
+
+            let taskData = {
+              name: "updated",
+              assignee: "moin@fabsbehrens.de",
+              workspace: "Workplace",
+              asanaGID: asanaGID,
+              nummer: "test nummer",
+              project: "testkunde",
+              status: "offen",
+              termin: "24-12-20",
+            };
+
+            await updateTask(taskData);
           } catch (error) {
             console.log(error);
           }

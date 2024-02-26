@@ -95,7 +95,7 @@ export async function getTask(asanaGid) {
 export async function updateTask(taskData) {
   try {
     const response = await fetch(
-      "https://pool-asana.vercel.app/api/tasks/update", // Adjust the URL to your task update endpoint
+      "https://pool-asana.vercel.app/api/tickets/update", // Adjust the URL to your task update endpoint
       {
         method: "POST",
         headers: {

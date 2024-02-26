@@ -110,9 +110,9 @@ export async function getAndUpdateTask(asanaGID) {
       const name = response.data.name;
 
       let taskData = {
-        name: "",
+        name: name,
         assignee: assignee,
-        workspace: "Workplace",
+        workspace: "1203216507389836",
         asanaGID: asanaGID,
         nummer: nummer,
         project: kunde,

@@ -30,9 +30,9 @@ export default async function handler(req, res) {
         // Fail
         res.status(401).end();
       } else {
-        if (req.body.events[0].resource.gid) {
+        if (req.body.events[0]) {
           try {
-            console.log(req.body.events[0].resource.gid);
+            console.log(JSON.stringify(req.body.events[0]));
           } catch (error) {
             console.log(error);
           }

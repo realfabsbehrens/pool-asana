@@ -23,7 +23,7 @@ export async function getAsanaTask(asanaGID) {
     let tasksApiInstance = new Asana.TasksApi();
     let opts = {
       opt_fields:
-        "assignee.name,custom_fields.enum_value,custom_fields.name,custom_fields.text_value,due_on,notes",
+        "assignee.name,custom_fields.enum_value,custom_fields.name,custom_fields.text_value,due_on,notes,name",
     };
 
     tasksApiInstance.getTask(asanaGID, opts).then(

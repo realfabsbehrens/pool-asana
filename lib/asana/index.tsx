@@ -48,18 +48,21 @@ export async function getAndInsertTask(asanaGID) {
 
     if (response.data.gid) {
       const asanaGID = response.data.gid;
-      const assignee = response.data.assignee.name;
-      const status = response.data.custom_fields.find(
+      const assignee = response.data.assignee?.name ?? "No Assignee";
+      const statusField = response.data.custom_fields.find(
         (field) => field.name === "Status"
-      ).enum_value.name;
-      const kunde = response.data.custom_fields.find(
+      );
+      const status = statusField?.enum_value?.name ?? "DefaultStatus";
+      const kundeField = response.data.custom_fields.find(
         (field) => field.name === "Kunde & Projekt"
-      ).text_value;
-      const nummer = response.data.custom_fields.find(
+      );
+      const kunde = kundeField?.text_value ?? "DefaultKunde";
+      const nummerField = response.data.custom_fields.find(
         (field) => field.name === "Ticketnummer"
-      ).text_value;
+      );
+      const nummer = nummerField?.text_value ?? "DefaultTicketnummer";
 
-      const termin = response.data.due_on;
+      const termin = response.data.due_on ?? "No Due Date";
       const name = response.data.name;
 
       let taskData = {

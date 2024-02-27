@@ -44,7 +44,6 @@ export async function DeleteTask(asanaGid) {
           Accept: "application/json, text/plain, */*",
           "Content-Type": "application/json",
         },
-        timeout: 50000, // Adjust the timeout value as needed (in milliseconds)
       }
     );
     response = await response.json();
@@ -64,7 +63,6 @@ export async function insertTask(taskData) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(taskData), // Add your payload here
-        timeout: 50000, // Adjust the timeout value as needed (in milliseconds)
       }
     );
     response = await response.json();
@@ -83,7 +81,6 @@ export async function getTask(asanaGid) {
           Accept: "application/json, text/plain, */*",
           "Content-Type": "application/json",
         },
-        timeout: 50000, // Adjust the timeout value as needed (in milliseconds)
       }
     );
     response = await response.json();
@@ -103,7 +100,6 @@ export async function updateTask(taskData) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(taskData),
-        timeout: 50000,
       }
     );
 

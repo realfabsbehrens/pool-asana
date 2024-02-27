@@ -47,7 +47,6 @@ export async function getAndInsertTask(asanaGID) {
     const response = await getAsanaTask(asanaGID);
 
     if (response.data.gid) {
-      const assignee = response.data.assignee.name;
       const status =
         response.data.custom_fields[0]?.enum_value?.name ?? "DefaultStatus";
       const kunde =
@@ -59,7 +58,7 @@ export async function getAndInsertTask(asanaGID) {
 
       let taskData = {
         name: name,
-        assignee: assignee,
+        assignee: "fabian behrens",
         workspace: "Workplace",
         asanaGID: asanaGID,
         nummer: nummer,

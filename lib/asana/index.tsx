@@ -48,29 +48,16 @@ export async function getAndInsertTask(asanaGID) {
 
     if (response.data.gid) {
       const asanaGID = response.data.gid;
-      const assignee = response.data.assignee.name;
-      const status = response.data.custom_fields.find(
-        (field) => field.name === "Status"
-      ).enum_value.name;
-      const kunde = response.data.custom_fields.find(
-        (field) => field.name === "Kunde & Projekt"
-      ).text_value;
-      const nummer = response.data.custom_fields.find(
-        (field) => field.name === "Ticketnummer"
-      ).text_value;
-      const tickettext = response.data.notes;
-      const termin = response.data.due_on;
-      const name = response.data.name;
 
       let taskData = {
-        name: "",
-        assignee: assignee,
+        name: "Name fehlt!",
+        assignee: "nicht zugewiesen",
         workspace: "Workplace",
         asanaGID: asanaGID,
-        nummer: nummer,
-        project: kunde,
-        status: status,
-        termin: termin,
+        nummer: "Task123",
+        project: "ProjectXYZ",
+        status: "In Progress",
+        termin: "2024-02-11",
       };
 
       await insertTask(taskData);

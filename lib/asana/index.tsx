@@ -77,24 +77,26 @@ export async function getAndInsertTask(asanaGID) {
 
 export async function getAndUpdateTask(asanaGID) {
   try {
-    // Adding a 2-second delay before calling getAsanaTask
-
-    const response = await getAsanaTask(asanaGID);
-
     if (response.data.gid) {
-      const asanaGID = response.data.gid;
+      const status =
+        response.data.custom_fields[0]?.enum_value?.name ?? "DefaultStatus";
+      const kunde =
+        response.data.custom_fields[1]?.text_value ?? "DefaultKunde";
+      const nummer =
+        response.data.custom_fields[2]?.text_value ?? "DefaultNummer";
+      const termin = response.data.due_on;
+      const name = response.data.name ?? "DefaultName";
 
       let taskData = {
-        name: "Name fehlt!",
-        assignee: "nicht zugewiesen",
+        name: name,
+        assignee: "fabian behrens",
         workspace: "Workplace",
         asanaGID: asanaGID,
-        nummer: "Task123",
-        project: "ProjectXYZ",
-        status: "In Progress",
-        termin: "2024-02-11",
+        nummer: nummer,
+        project: kunde,
+        status: status,
+        termin: termin,
       };
-
       await updateTask(taskData);
     }
   } catch (error) {

@@ -1,8 +1,7 @@
 // pages/api/webhook.js
 import crypto from "crypto";
 import { createHmac } from "crypto";
-import { getAsanaTask } from "@/lib/asana";
-import { getAndDeleteTask } from "@/lib/asana";
+import { getAndInsertTask } from "@/lib/asana";
 // Replace 'YOUR_ACCESS_TOKEN' with your Asana Personal Access Token
 const accessToken = process.env.ASANAKEY;
 
@@ -34,8 +33,7 @@ export default async function handler(req, res) {
           try {
             const asanaGID = req.body.events[0].resource.gid;
             console.log(asanaGID);
-            await getAndDeleteTask(asanaGID);
-            // await getAsanaTask(asanaGID);
+            await getAndInsertTask(asanaGID);
           } catch (error) {
             console.log(error);
           }

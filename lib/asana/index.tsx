@@ -42,7 +42,7 @@ export async function getAsanaTask(asanaGID) {
   });
 }
 
-export async function getAndDeleteTask(asanaGID) {
+export async function getAndInsertTask(asanaGID) {
   try {
     // Adding a 2-second delay before calling getAsanaTask
 
@@ -76,11 +76,6 @@ export async function getAndDeleteTask(asanaGID) {
       };
 
       await insertTask(taskData);
-
-      // Adding a 4-second delay before calling updateTask
-      await new Promise((resolve) => setTimeout(resolve, 4000));
-
-      await updateTask(taskData);
     }
   } catch (error) {
     console.error(error.response.body);

@@ -58,12 +58,12 @@ export async function getAndInsertTask(asanaGID) {
       const nummer = response.data.custom_fields.find(
         (field) => field.name === "Ticketnummer"
       ).text_value;
-      const tickettext = response.data.notes;
+
       const termin = response.data.due_on;
       const name = response.data.name;
 
       let taskData = {
-        name: "",
+        name: name,
         assignee: assignee,
         workspace: "Workplace",
         asanaGID: asanaGID,
@@ -73,6 +73,7 @@ export async function getAndInsertTask(asanaGID) {
         termin: termin,
       };
 
+      console.log(taskData);
       await insertTask(taskData);
     }
   } catch (error) {

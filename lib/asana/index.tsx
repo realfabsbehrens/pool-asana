@@ -88,19 +88,6 @@ export async function getAndUpdateTask(asanaGID) {
 
     if (response.data.gid) {
       const asanaGID = response.data.gid;
-      const assignee = response.data.assignee.name;
-      const status = response.data.custom_fields.find(
-        (field) => field.name === "Status"
-      ).enum_value.name;
-      const kunde = response.data.custom_fields.find(
-        (field) => field.name === "Kunde & Projekt"
-      ).text_value;
-      const nummer = response.data.custom_fields.find(
-        (field) => field.name === "Ticketnummer"
-      ).text_value;
-      const tickettext = response.data.notes;
-      const termin = response.data.due_on;
-      const name = response.data.name;
 
       let taskData = {
         name: "Name fehlt!",

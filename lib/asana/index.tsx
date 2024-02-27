@@ -44,8 +44,6 @@ export async function getAsanaTask(asanaGID) {
 
 export async function getAndInsertTask(asanaGID) {
   try {
-    // Adding a 2-second delay before calling getAsanaTask
-
     const response = await getAsanaTask(asanaGID);
 
     if (response.data.gid) {
@@ -105,14 +103,14 @@ export async function getAndUpdateTask(asanaGID) {
       const name = response.data.name;
 
       let taskData = {
-        name: name,
-        assignee: assignee,
-        workspace: "1203216507389836",
+        name: "Name fehlt!",
+        assignee: "nicht zugewiesen",
+        workspace: "Workplace",
         asanaGID: asanaGID,
-        nummer: nummer,
-        project: kunde,
-        status: status,
-        termin: termin,
+        nummer: "Task123",
+        project: "ProjectXYZ",
+        status: "In Progress",
+        termin: "2024-02-11",
       };
 
       await updateTask(taskData);

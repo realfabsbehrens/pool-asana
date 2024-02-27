@@ -77,6 +77,8 @@ export async function getAndInsertTask(asanaGID) {
 
 export async function getAndUpdateTask(asanaGID) {
   try {
+    const response = await getAsanaTask(asanaGID);
+
     if (response.data.gid) {
       const status =
         response.data.custom_fields[0]?.enum_value?.name ?? "DefaultStatus";

@@ -47,17 +47,11 @@ export async function getAndInsertTask(asanaGID) {
     const response = await getAsanaTask(asanaGID);
 
     if (response.data.gid) {
-      const customFields = response.data.custom_fields || [];
-
-      const status =
-        customFields.find((field) => field.name === "Status")?.enum_value
-          ?.name || "";
-      const kunde =
-        customFields.find((field) => field.name === "Kunde")?.text_value || "";
-      const nummer =
-        customFields.find((field) => field.name === "Nummer")?.text_value || "";
+      const status = response.data.custom_fields[0]?.enum_value?.name ?? "";
+      const kunde = response.data.custom_fields[1]?.text_value ?? "";
+      const nummer = response.data.custom_fields[2]?.text_value ?? "";
       const termin = response.data.due_on;
-      const name = response.data.name || "";
+      const name = response.data.name ?? "";
 
       let taskData = {
         name: name,
@@ -83,17 +77,11 @@ export async function getAndUpdateTask(asanaGID) {
     const response = await getAsanaTask(asanaGID);
 
     if (response.data.gid) {
-      const customFields = response.data.custom_fields || [];
-
-      const status =
-        customFields.find((field) => field.name === "Status")?.enum_value
-          ?.name || "";
-      const kunde =
-        customFields.find((field) => field.name === "Kunde")?.text_value || "";
-      const nummer =
-        customFields.find((field) => field.name === "Nummer")?.text_value || "";
+      const status = response.data.custom_fields[0]?.enum_value?.name ?? "";
+      const kunde = response.data.custom_fields[1]?.text_value ?? "";
+      const nummer = response.data.custom_fields[2]?.text_value ?? "";
       const termin = response.data.due_on;
-      const name = response.data.name || "";
+      const name = response.data.name ?? "";
 
       let taskData = {
         name: name,

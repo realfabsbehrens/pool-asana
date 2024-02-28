@@ -47,19 +47,22 @@ export async function getAndInsertTask(asanaGID) {
     const response = await getAsanaTask(asanaGID);
 
     if (response.data.gid) {
+      const customFields = response.data.custom_fields || [];
+
       const status =
-        response.data.custom_fields[0]?.enum_value?.name ?? "DefaultStatus";
+        customFields.find((field) => field.name === "Status")?.enum_value
+          ?.name || "";
       const kunde =
-        response.data.custom_fields[1]?.text_value ?? "DefaultKunde";
+        customFields.find((field) => field.name === "Kunde")?.text_value || "";
       const nummer =
-        response.data.custom_fields[2]?.text_value ?? "DefaultNummer";
+        customFields.find((field) => field.name === "Nummer")?.text_value || "";
       const termin = response.data.due_on;
-      const name = response.data.name ?? "DefaultName";
+      const name = response.data.name || "";
 
       let taskData = {
         name: name,
         assignee: "fabian behrens",
-        workspace: "Workplace",
+        workspace: "1203216507389836",
         asanaGID: asanaGID,
         nummer: nummer,
         project: kunde,
@@ -71,7 +74,7 @@ export async function getAndInsertTask(asanaGID) {
       await insertTask(taskData);
     }
   } catch (error) {
-    console.error(error.response.body);
+    console.error(error);
   }
 }
 

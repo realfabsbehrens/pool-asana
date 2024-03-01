@@ -55,6 +55,7 @@ const responseData = {
 
 export default async (req, res) => {
   try {
+    console.log(JSON.stringify.req);
     res.json(responseData);
   } catch (e) {
     console.error(e);

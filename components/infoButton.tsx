@@ -10,11 +10,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import dynamic from "next/dynamic";
-
-const ClientInfoButton = dynamic(() => import("./webhookInfo"), {
-  ssr: false,
-});
 
 export function InfoButton() {
   return (
@@ -28,7 +23,6 @@ export function InfoButton() {
         <SheetHeader>
           <SheetTitle>Status</SheetTitle>
           <SheetDescription>
-            <ClientInfoButton />
             Hier siehst du den aktuellen Status der Webhooks von Asana.
           </SheetDescription>
         </SheetHeader>

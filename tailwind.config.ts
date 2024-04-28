@@ -10,6 +10,15 @@ const config = {
 	],
   prefix: "",
   theme: {
+    backgroundSize: {
+      'auto': 'auto',
+      'cover': 'cover',
+      'contain': 'contain',
+      '50%': '50%',
+      '16': '4rem',
+    },
+
+
     container: {
       center: true,
       padding: "2rem",
@@ -18,6 +27,10 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        'pattern': "url('/img/pattern.svg')",
+        'pattern-dark': "url('/img/pattern-dark.svg')",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

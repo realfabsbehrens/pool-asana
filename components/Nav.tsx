@@ -1,6 +1,8 @@
-import Image from "next/image";
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "./ui/toggle-mode";
+import { InfoButton } from "./infoButton";
 
 export default function Nav() {
   return (
@@ -24,14 +26,8 @@ export default function Nav() {
                 Datenbank{" "}
               </a>
             </Button>
-            <Button variant={"secondary"}>
-              <a
-                href="https://app.asana.com/0/home/1203216507389847"
-                target="blank"
-              >
-                Asana
-              </a>
-            </Button>
+
+            <InfoButton></InfoButton>
             <ModeToggle></ModeToggle>
           </li>
         </ul>

@@ -96,7 +96,6 @@ const Tickets = () => {
                 <TableCell className={bgStatus}>{ticket.status}</TableCell>
                 <TableCell className="text-right flex flex-row">
                   <ChangeButton ticket={ticket}></ChangeButton>
-                  <DeleteButton asanaGID={ticket.asanaGID} />
                 </TableCell>
               </TableRow>
             );
